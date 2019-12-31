@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:tns="http://nsn.com/DeviceManagement/wsdl/DeviceSecurity/2.0"
+	 xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	 targetNamespace="http://nsn.com/DeviceManagement/wsdl/DeviceSecurity/2.0"
+	 version="1.0"
+	 elementFormDefault="unqualified"
+	 attributeFormDefault="unqualified">
+	<xs:complexType name="autoLockSettings">
+		<xs:sequence>
+			<xs:element name="autoLockOn" type="xs:int" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="passwordPolicySettings">
+		<xs:sequence>
+			<xs:element name="expirationInterval" type="xs:int" minOccurs="0"/>
+			<xs:element name="historyBufferSize" type="xs:int" minOccurs="0"/>
+			<xs:element name="maxLength" type="xs:int" minOccurs="0"/>
+			<xs:element name="maxRepeatedCharacters" type="xs:int" minOccurs="0"/>
+			<xs:element name="minLength" type="xs:int" minOccurs="0"/>
+			<xs:element name="requireCharsAndNumbers" type="tns:requirementSetting" minOccurs="0"/>
+			<xs:element name="requireUpperAndLower" type="tns:requirementSetting" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="requirementSetting">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NOT_REQUIRED"/>
+			<xs:enumeration value="REQUIRED"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	 xmlns:EAIschema="http://xmlns.vfe.com.eg/EAI/celfocus"
+	 xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	 targetNamespace="http://xmlns.vfe.com.eg/EAI/celfocus"
+	 elementFormDefault="qualified"
+	 attributeFormDefault="unqualified">
+
+	<!--
+/******************************************************************************
+  Name:         	response
+  Description:    	Pre defined fields for response codes and descriton
+
+   History:
+   Ver.        Date			Author(s)           			Description
+   _______________________________________________________
+   1.0        21-04-2005		Filipe Pateiro			Creation
+******************************************************************************/
+-->
+	<complexType name="eCodes">
+		<sequence>
+			<element name="eCode" type="xsd:string" nillable="true" minOccurs="0"/>
+			<element name="eDescription" type="xsd:string" nillable="true" minOccurs="0"/>
+			<element name="reasonCode" type="xsd:string" nillable="true" minOccurs="0">
+				<annotation>
+					<documentation>reasonCode present the real error code which has been thrown by TIBCO or by Back End System</documentation>
+				</annotation>
+			</element>
+			<element name="message" type="xsd:string" nillable="true" minOccurs="0">
+				<annotation>
+					<documentation>message present description for the real Error which has been thrown by TIBCO or by Back End System</documentation>
+				</annotation>
+			</element>
+			<element name="Category" type="xsd:string" nillable="true" minOccurs="0">
+				<annotation>
+					<documentation>error category { Business or Technical}</documentation>
+				</annotation>
+			</element>
+			<element name="Severity" type="xsd:string" nillable="true" minOccurs="0">
+				<annotation>
+					<documentation>error Severity { High , Medium , low } </documentation>
+				</annotation>
+			</element>
+			<element name="RetryFlag" type="xsd:string" nillable="true" minOccurs="0">
+				<annotation>
+					<documentation> may be used in future to flag retriable errors </documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="Context">
+		<sequence>
+			<element name="TrackingID" type="xsd:string" nillable="true" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<element name="EAIException">
+		<complexType>
+			<sequence>
+				<element name="eCodes" type="EAIschema:eCodes" nillable="true" minOccurs="0"/>
+				<element name="Context" type="EAIschema:Context" nillable="true" minOccurs="0"/>
+			</sequence>
+		</complexType>
+	</element>
+</schema>

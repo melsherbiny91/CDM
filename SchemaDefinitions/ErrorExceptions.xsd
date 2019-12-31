@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	 xmlns="http://www.tibco.com/schemas/Template/CommonResources/SchemaDefinitions/ErrorExceptions.xsd"
+	 xmlns:ns0="http://xmlns.vfe.com.eg/CommonResources/SchemaDefinitions/KeyValueParam"
+	 xmlns:responseEAI="http://xmlns.vfe.com.eg/EAI/celfocus/responseEAI"
+	 targetNamespace="http://www.tibco.com/schemas/Template/CommonResources/SchemaDefinitions/ErrorExceptions.xsd"
+	 elementFormDefault="qualified"
+	 attributeFormDefault="unqualified">
+	<xs:import namespace="http://xmlns.vfe.com.eg/CommonResources/SchemaDefinitions/KeyValueParam" schemaLocation="KeyValueParam.xsd"/>
+	<xs:import namespace="http://xmlns.vfe.com.eg/EAI/celfocus/responseEAI" schemaLocation="EAIschema/responseEAI.xsd"/>
+
+	<!-- Service Dispatcher Errors -->
+	<xs:element name="ServiceDispatcherError" type="ServiceDispatcherError"/>
+	<xs:complexType name="ServiceDispatcherError">
+		<xs:sequence>
+			<xs:element name="callerServiceCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="callerServiceName" type="xs:string" minOccurs="0"/>
+			<xs:element name="calledServiceCode" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="TechnicalTransportException" type="TechnicalTransportException"/>
+	<xs:complexType name="TechnicalTransportException">
+		<xs:sequence>
+			<xs:element name="destination" type="xs:string"/>
+			<xs:element name="transport" type="xs:string" minOccurs="0"/>
+			<xs:element name="calledAsync" type="xs:string" minOccurs="0"/>
+			<xs:element name="timeout" type="xs:string" minOccurs="0"/>
+			<xs:element name="AdditionalProperties" type="ns0:Parameters" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="BusinessError" type="BusinessError"/>
+	<xs:complexType name="BusinessError">
+		<xs:sequence>
+			<xs:element name="calledServiceCode" type="xs:string"/>
+			<xs:element name="Rows" type="responseEAI:Rows" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

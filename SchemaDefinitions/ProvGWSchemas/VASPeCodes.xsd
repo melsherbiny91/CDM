@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	 xmlns:VASPeCodes="http://xmlns.vfe.com.eg/middleware/TCPFramework/ModelSchema/VASPeCodes"
+	 targetNamespace="http://xmlns.vfe.com.eg/middleware/TCPFramework/ModelSchema/VASPeCodes"
+	 elementFormDefault="qualified"
+	 attributeFormDefault="unqualified">
+	<xs:complexType name="VASPeCodes">
+		<xs:sequence>
+			<xs:element name="RequestStatus" type="xs:string" minOccurs="0"/>
+			<xs:element name="errorCode" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

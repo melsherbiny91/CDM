@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema elementFormDefault="qualified" version="1.0" targetNamespace="http://xml.comptel.com/request-api" xmlns:ns1="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:tns="http://xml.comptel.com/request-api" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:import namespace="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" schemaLocation="RequestService_schema2.xsd"/>
+
+  <xs:element name="Security" type="tns:security"/>
+
+  <xs:element name="addSubscription" type="tns:addSubscription"/>
+
+  <xs:element name="addSubscriptionResponse" type="tns:addSubscriptionResponse"/>
+
+  <xs:element name="authenticate" type="tns:authenticate"/>
+
+  <xs:element name="authenticateResponse" type="tns:authenticateResponse"/>
+
+  <xs:element name="deleteSubscription" type="tns:deleteSubscription"/>
+
+  <xs:element name="deleteSubscriptionResponse" type="tns:deleteSubscriptionResponse"/>
+
+  <xs:element name="inquireSubscription" type="tns:inquireSubscription"/>
+
+  <xs:element name="inquireSubscriptionResponse" type="tns:inquireSubscriptionResponse"/>
+
+  <xs:element name="updateSubscription" type="tns:updateSubscription"/>
+
+  <xs:element name="updateSubscriptionResponse" type="tns:updateSubscriptionResponse"/>
+
+  <xs:complexType name="deleteSubscription">
+    <xs:sequence>
+      <xs:element name="deleteSubscriptionRecord" type="tns:deleteSubscriptionRecord" form="unqualified" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="deleteSubscriptionRecord">
+    <xs:sequence>
+      <xs:element name="ADSLID" type="xs:string" minOccurs="0"/>
+      <xs:element name="VoiceID" type="xs:string" minOccurs="0"/>
+      <xs:element name="channelID" type="xs:string" minOccurs="0"/>
+      <xs:element name="MSISDN" type="xs:string" minOccurs="0"/>
+      <xs:element name="packageID" type="xs:string" minOccurs="0"/>
+      <xs:element name="productID" type="xs:string" minOccurs="0"/>
+      <xs:element name="requestType" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="deleteSubscriptionResponse">
+    <xs:sequence>
+      <xs:element name="outputER" type="tns:responseRecord" form="unqualified" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="responseRecord">
+    <xs:sequence>
+      <xs:element name="channelID" type="xs:string" minOccurs="0"/>
+      <xs:element name="message" type="xs:string" minOccurs="0"/>
+      <xs:element name="messageCode" type="xs:string" minOccurs="0"/>
+      <xs:element name="requestType" type="xs:string" minOccurs="0"/>
+      <xs:element name="resultCode" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="updateSubscription">
+    <xs:sequence>
+      <xs:element name="updateSubscriptionRecord" type="tns:updateSubscriptionRecord" form="unqualified" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="updateSubscriptionRecord">
+    <xs:sequence>
+      <xs:element name="ADSLID" type="xs:string" minOccurs="0"/>
+      <xs:element name="VoiceID" type="xs:string" minOccurs="0"/>
+      <xs:element name="advancedPaymentPeriod" type="xs:string" minOccurs="0"/>
+      <xs:element name="billCycleDate" type="xs:string" minOccurs="0"/>
+      <xs:element name="channelID" type="xs:string" minOccurs="0"/>
+      <xs:element name="forcedState" type="xs:string" minOccurs="0"/>
+      <xs:element name="MSISDN" type="xs:string" minOccurs="0"/>
+      <xs:element name="newMSISDN" type="xs:string" minOccurs="0"/>
+      <xs:element name="newPackageID" type="xs:string" minOccurs="0"/>
+      <xs:element name="newParentID" type="xs:string" minOccurs="0"/>
+      <xs:element name="newProductID" type="xs:string" minOccurs="0"/>
+      <xs:element name="packageID" type="xs:string" minOccurs="0"/>
+      <xs:element name="packagePriority" type="xs:string" minOccurs="0"/>
+      <xs:element name="productID" type="xs:string" minOccurs="0"/>
+      <xs:element name="requestType" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="updateSubscriptionResponse">
+    <xs:sequence>
+      <xs:element name="outputER" type="tns:responseRecord" form="unqualified" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="addSubscription">
+    <xs:sequence>
+      <xs:element name="subscriptionRecord" type="tns:subscriptionRecord" form="unqualified" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="subscriptionRecord">
+    <xs:sequence>
+      <xs:element name="ADSLID" type="xs:string" minOccurs="0"/>
+      <xs:element name="VoiceID" type="xs:string" minOccurs="0"/>
+      <xs:element name="channelID" type="xs:string" minOccurs="0"/>
+      <xs:element name="IMEI" type="xs:string" minOccurs="0"/>
+      <xs:element name="MSISDN" type="xs:string" minOccurs="0"/>
+      <xs:element name="packageID" type="xs:string" minOccurs="0"/>
+      <xs:element name="packagePriority" type="xs:string" minOccurs="0"/>
+      <xs:element name="productID" type="xs:string" minOccurs="0"/>
+      <xs:element name="promotion" type="xs:string" minOccurs="0"/>
+      <xs:element name="requestType" type="xs:string" minOccurs="0"/>
+      <xs:element name="subscriberParentID" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="addSubscriptionResponse">
+    <xs:sequence>
+      <xs:element name="outputER" type="tns:responseRecord" form="unqualified" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="inquireSubscription">
+    <xs:sequence>
+      <xs:element name="inquireSubscriptionRecord" type="tns:inquireSubscriptionRecord" form="unqualified" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="inquireSubscriptionRecord">
+    <xs:sequence>
+      <xs:element name="ADSLID" type="xs:string" minOccurs="0"/>
+      <xs:element name="VoiceID" type="xs:string" minOccurs="0"/>
+      <xs:element name="channelID" type="xs:string" minOccurs="0"/>
+      <xs:element name="MSISDN" type="xs:string" minOccurs="0"/>
+      <xs:element name="packageID" type="xs:string" minOccurs="0"/>
+      <xs:element name="packageType" type="xs:string" minOccurs="0"/>
+      <xs:element name="productID" type="xs:string" minOccurs="0"/>
+      <xs:element name="requestType" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="inquireSubscriptionResponse">
+    <xs:sequence>
+      <xs:element name="outputER" type="tns:eventRecord" form="unqualified" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="eventRecord">
+    <xs:sequence>
+      <xs:element name="channelID" type="xs:string" minOccurs="0"/>
+      <xs:element name="field" type="tns:eventRecordField" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="message" type="xs:string" minOccurs="0"/>
+      <xs:element name="messageCode" type="xs:string" minOccurs="0"/>
+      <xs:element name="requestType" type="xs:string" minOccurs="0"/>
+      <xs:element name="resultCode" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="eventRecordField">
+    <xs:sequence>
+      <xs:element name="field" type="tns:eventRecordField" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="name" type="xs:string"/>
+      <xs:element name="value" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="authenticate">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="security">
+    <xs:sequence>
+      <xs:element ref="ns1:UsernameToken"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="authenticateResponse">
+    <xs:sequence>
+      <xs:element name="status" type="xs:boolean" form="unqualified"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
+

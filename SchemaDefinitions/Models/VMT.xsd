@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	 xmlns:VMT="http://xmlns.vfe.com.eg/middleware/Models/VMT"
+	 targetNamespace="http://xmlns.vfe.com.eg/middleware/Models/VMT"
+	 elementFormDefault="qualified"
+	 attributeFormDefault="unqualified">
+	<xs:element name="VMT" type="VMT:VMT"/>
+	<xs:complexType name="VMT">
+		<xs:sequence>
+			<xs:element name="VMTProfile" type="VMT:VMTProfile" nillable="true" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="VMTProfile">
+		<xs:sequence>
+			<xs:element name="PIN" type="xs:string" nillable="true" minOccurs="0"/>
+			<xs:element name="Balance" type="VMT:Balance" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Status" type="xs:string" nillable="true" minOccurs="0"/>
+			<xs:element name="Language" type="xs:string" nillable="true" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Balance">
+		<xs:sequence>
+			<xs:element name="Main" type="xs:string" nillable="true" minOccurs="0"/>
+			<xs:element name="Frozen" type="xs:string" nillable="true" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

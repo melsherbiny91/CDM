@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	 xmlns="http://www.tibco.com/schemas/Template/CommonResources/SchemaDefinitions/ServicesDispatcher/Schema.xsd"
+	 xmlns:KVParam="http://xmlns.vfe.com.eg/CommonResources/SchemaDefinitions/KeyValueParam"
+	 targetNamespace="http://www.tibco.com/schemas/Template/CommonResources/SchemaDefinitions/ServicesDispatcher/Schema.xsd"
+	 elementFormDefault="qualified"
+	 attributeFormDefault="unqualified">
+	<xs:import namespace="http://xmlns.vfe.com.eg/CommonResources/SchemaDefinitions/KeyValueParam" schemaLocation="../KeyValueParam.xsd"/>
+	<xs:element name="ServicesUsage">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="ServiceUsage" minOccurs="0" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="ServiceCode" type="xs:string" minOccurs="0"/>
+							<xs:element name="CalledServices">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element ref="Service" minOccurs="0" maxOccurs="unbounded"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Service">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Address" type="xs:string" minOccurs="0"/>
+				<xs:element name="EndpointType" type="xs:string" minOccurs="0"/>
+				<xs:element name="IsReplying" type="xs:string" minOccurs="0"/>
+				<xs:element name="Timeout" type="xs:string" minOccurs="0"/>
+				<xs:element name="LoggingKey" type="xs:string" minOccurs="0"/>
+				<xs:element name="ServiceName" type="xs:string" minOccurs="0"/>
+				<xs:element name="AdditionalProperties" type="KVParam:Parameters" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="code" type="xs:string" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Services">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Service" minOccurs="0" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="ServiceCode" type="xs:string" minOccurs="0"/>
+							<xs:element name="ServiceName" type="xs:string" minOccurs="0"/>
+							<xs:element name="CompName" type="xs:string" minOccurs="0"/>
+							<xs:element name="CompType" type="xs:string" minOccurs="0"/>
+							<xs:element name="LoggingKey" type="xs:string" minOccurs="0"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	 xmlns="http://xmlns.vfe.com.eg/EAI/celfocus"
+	 targetNamespace="http://xmlns.vfe.com.eg/EAI/celfocus"
+	 elementFormDefault="qualified"
+	 attributeFormDefault="unqualified">
+	<xs:element name="svcresult">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="hdr" minOccurs="0"/>
+				<xs:element ref="slia"/>
+			</xs:sequence>
+			<xs:attribute name="ver" default="3.1.0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="3.1.0"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="hdr">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="client">
+					<xs:attribute name="ver" default="3.0.0">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:enumeration value="3.0.0"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="client">
+		<xs:sequence>
+			<xs:element ref="client"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="client">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="id"/>
+				<xs:element ref="serviceid" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="id" type="xs:string"/>
+	<xs:element name="serviceid" type="xs:string"/>
+	<xs:element name="slia">
+		<xs:complexType>
+			<xs:choice>
+				<xs:element ref="pos" maxOccurs="unbounded"/>
+				<xs:element ref="result"/>
+			</xs:choice>
+			<xs:attribute name="Ver" default="3.0.0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="3.0.0"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="pos">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="msid"/>
+				<xs:element ref="pd" minOccurs="0"/>
+				<xs:element ref="poserr" minOccurs="0"/>
+
+				<!--
+				<xs:choice>
+					<xs:element ref="pd"/>
+					<xs:element ref="poserr"/>
+				</xs:choice>
+-->
+				<xs:element ref="gsmnetparam" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="msid">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="value" type="xs:string"/>
+			</xs:sequence>
+			<xs:attribute name="type" default="MSISDN">
+				<xs:simpleType>
+					<xs:restriction base="xs:token">
+						<xs:enumeration value="MSISDN"/>
+						<xs:enumeration value="IMSI"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="poserr">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="result"/>
+				<xs:element ref="addinfo" minOccurs="0"/>
+				<xs:element ref="time"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="pd">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="time"/>
+				<xs:element ref="shape"/>
+				<xs:element ref="address" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="time">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="timevalue" type="xs:string"/>
+			</xs:sequence>
+			<xs:attribute name="utcoff" type="xs:anySimpleType" default="0000"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="addinfo" type="xs:string"/>
+	<xs:element name="shape">
+		<xs:complexType>
+			<xs:choice>
+				<xs:element ref="Point"/>
+				<xs:element ref="CircularArea"/>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Point">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="coord">
+					<xs:attribute name="gid" type="xs:anySimpleType"/>
+					<xs:attribute name="srsName" type="xs:anySimpleType"/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CircularArea">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="coord">
+					<xs:sequence>
+						<xs:element ref="radius"/>
+					</xs:sequence>
+					<xs:attribute name="gid" type="xs:anySimpleType"/>
+					<xs:attribute name="srsName" type="xs:anySimpleType"/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="coord">
+		<xs:sequence>
+			<xs:element ref="coord"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="coord">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="X"/>
+				<xs:element ref="Y" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="radius" type="xs:string"/>
+	<xs:element name="X" type="xs:string"/>
+	<xs:element name="Y" type="xs:string"/>
+	<xs:element name="gsmnetparam">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="cgi" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="cgi">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="mcc"/>
+				<xs:element ref="mnc"/>
+				<xs:element ref="lac"/>
+				<xs:element ref="cellid"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="mcc" type="xs:string"/>
+	<xs:element name="mnc" type="xs:string"/>
+	<xs:element name="lac" type="xs:string"/>
+	<xs:element name="cellid" type="xs:string"/>
+	<xs:element name="result">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="resvalue" type="xs:string"/>
+			</xs:sequence>
+			<xs:attribute name="resid" type="xs:anySimpleType" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="address">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="regionname" minOccurs="0"/>
+				<xs:element ref="cellname" minOccurs="0"/>
+				<xs:element ref="districtid" minOccurs="0"/>
+				<xs:element ref="districtname" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="regionname" type="xs:string"/>
+	<xs:element name="cellname" type="xs:string"/>
+	<xs:element name="districtid" type="xs:string"/>
+	<xs:element name="districtname" type="xs:string"/>
+</xs:schema>

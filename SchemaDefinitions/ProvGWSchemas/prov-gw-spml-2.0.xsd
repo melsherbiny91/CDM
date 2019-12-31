@@ -1,0 +1,891 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--****************************************************************************-->
+<!--  prov-gw-spml-2.0.xsd     is Provisioning Gateway SPML schema         -->
+<!--                                                                                                                             -->
+<!--  This ProvGw schema is common for both TMO and WM lines            -->
+<!--  It is described in                                                                                            -->
+<!--  Provisioning SPML Interface Specification for One-NDS v8.0              -->
+<!--                                                                                                                             -->
+<!--  This ProvGw SPML schema is based on the SPML V1.0 standard     --> 
+<!--  of OASIS (http://www.oasis-open.org)                                                       -->
+<!--  ProvGw SPML requests are modeled as an extension to OASIS SPML 1.0      -->
+<!--  The schema defined here defines the signature of the requests        -->
+<!--  commonly used by all applications. But for each application an         -->
+<!--  additional schema will be defined, where the concrete types of the    -->
+<!--  dataobjects used as parameteres in the requests are defined.          -->
+<!--  The main differences to OASIS SPML schema are:                                 	-->
+<!--  1.) Removed any dependencies to SAML and DSML                             -->
+<!--  2.) No use of any-data types, i. e. no use of the DSML attribute type.    -->
+<!--      Instead only attributes of type string are used here                  -->
+<!--  3.) No use of IdentifierType. Here all identifiers are plain strings      -->
+<!--  4.) ExtendedRequest/-Response and SchemaRequests/-Response are not        -->
+<!--	  needed any more.                                                      -->
+<!--  5.) Request/response now work on FirstClassObjects instead of lists of    -->
+<!--      attributes.                                                                                                      -->
+<!--                                                                                                                              -->
+<!--****************************************************************************-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:spml="urn:siemens:names:prov:gw:SPML:2:0" targetNamespace="urn:siemens:names:prov:gw:SPML:2:0" elementFormDefault="unqualified" attributeFormDefault="unqualified" version="2.0">
+    <!--************************************************************************-->
+    <!--  TYPE SECTION: Defining all needed basic types                         -->
+    <!--************************************************************************-->
+    <!-- definition of type Attr as key/value pairs, with value of type string -->
+    <xsd:complexType name="Attribute">
+        <xsd:sequence>
+            <xsd:element name="key" type="xsd:string"/>
+            <xsd:element name="value" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <!-- definition of Attributes as list of Attributes -->
+    <xsd:complexType name="Attributes">
+        <xsd:sequence>
+            <xsd:element name="attributes" type="spml:Attribute" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <!-- Release2: Added new parent class of FCO and SCO - due to modifyRequest extensions -->
+    <!-- Abstract Base Class: ExtensibleObject - is a parent of all object classes used in SPML -->
+    <xsd:complexType name="ExtensibleObject">
+        <xsd:annotation>
+            <xsd:documentation>Abstract base class for all object classes (FCO/SCO)</xsd:documentation>
+        </xsd:annotation>
+    </xsd:complexType>
+    <!-- Abstract Base Class: First Class Objects -->
+    <xsd:complexType name="FirstClassObject">
+        <xsd:annotation>
+            <xsd:documentation>Abstract base class for first class objects </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="spml:ExtensibleObject">
+                <xsd:sequence>
+                    <!-- xsd:element name="identifier" type="xsd:string" minOccurs="1" maxOccurs="1" /-->
+                    <xsd:element name="identifier" type="xsd:string" minOccurs="0"/>
+                </xsd:sequence>
+            </xsd:extension>
+            <!-- Release2: FCO is derived from ExtensibleObject -->
+        </xsd:complexContent>
+    </xsd:complexType>
+    <!-- Abstract Base Class: Second Class Objects, i. e. objects that are 
+		 contained in a first class object, but cannot ber referenced from outside
+	 -->
+    <xsd:complexType name="SecondClassObject">
+        <xsd:annotation>
+            <xsd:documentation>Abstract base class for second class objects </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="spml:ExtensibleObject"/>
+            <!-- Release2: SCO is derived from ExtensibleObject -->
+        </xsd:complexContent>
+    </xsd:complexType>
+    <!-- definition of type SecondClassObjects = collection of  SecondClassObject -->
+    <xsd:complexType name="SecondClassObjects">
+        <xsd:sequence>
+            <xsd:element name="objects" type="spml:SecondClassObject" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <!-- definition of type ExecutionType -->
+    <xsd:simpleType name="ExecutionType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="synchronous"/>
+            <xsd:enumeration value="asynchronous"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <!-- definition of type ResultCode, same as in SPML -->
+    <xsd:simpleType name="ResultCode">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="success"/>
+            <xsd:enumeration value="failure"/>
+            <xsd:enumeration value="pending"/>
+            <xsd:enumeration value="partial_success"/>            
+        </xsd:restriction>
+    </xsd:simpleType>
+    <!-- definition of type ProcessingType -->
+    <xsd:simpleType name="ProcessingType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="sequential"/>
+            <xsd:enumeration value="parallel"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <!-- definition of type OnErrorType -->
+    <xsd:simpleType name="OnErrorType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="resume"/>
+            <xsd:enumeration value="exit_commit"/>
+            <xsd:enumeration value="exit_rollback"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <!-- definition of type ModifyOperation -->
+    <xsd:simpleType name="ModifyOperationType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="add"/>
+            <xsd:enumeration value="addorset"/>
+            <xsd:enumeration value="remove"/>
+            <xsd:enumeration value="set"/>
+            <xsd:enumeration value="setoradd"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <!-- definition of type CancelResultType -->
+    <xsd:simpleType name="CancelResultType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="noSuchRequest"/>
+            <xsd:enumeration value="canceled"/>
+            <xsd:enumeration value="couldNotCancel"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <!-- definition of type StatusReturnsType -->
+    <xsd:simpleType name="StatusReturnsType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="status"/>
+            <xsd:enumeration value="result"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <!-- UNDO request not in release 1, leave it as a placeholder -->
+    <!-- definition of type UndoResultCode, result of undo request -->
+    <!-- xsd:simpleType name="UndoResultCode">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="noSuchRequest"/>
+			<xsd:enumeration value="undoDone"/>
+			<xsd:enumeration value="undoRejected"/>
+		</xsd:restriction>
+	</xsd:simpleType -->
+    <!-- UNDO request not in release 1, leave it as a placeholder -->
+    <!-- definition of type ReturnResultingObjectType -->
+    <xsd:simpleType name="ReturnResultingObjectType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="none"/>
+            <xsd:enumeration value="full"/>
+            <xsd:enumeration value="identifier"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <!-- Release2: type for scope of type in modification element -->
+    <xsd:simpleType name="ModificationTypeMappingScope">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="uniqueTypeMapping"/>
+            <xsd:enumeration value="abstractTypeMapping"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <!-- definition of type SpmlModification, may contain simple attributes -->
+    <xsd:complexType name="SpmlModification">
+        <xsd:sequence>
+            <!-- Release2: match clause can be also FCO - ExtensibleObject -->
+            <xsd:element name="match" type="spml:ExtensibleObject" minOccurs="0"/>
+            <!-- "components" resp. "complex" attributes to be modified -->
+            <!-- Release2: valueObject can be also FCO - ExtensibleObject -->
+            <xsd:element name="valueObject" type="spml:ExtensibleObject" minOccurs="0"/>
+        </xsd:sequence>
+        <xsd:attribute name="operation" type="spml:ModifyOperationType" use="required"/>
+        <xsd:attribute name="name" type="xsd:string" use="optional"/>
+        <xsd:attribute name="index" type="xsd:int" use="optional"/>
+        <xsd:attribute name="scope" type="spml:ModificationTypeMappingScope" default="uniqueTypeMapping"/>
+        <!-- Release2: in order to support abstract types in modification an attribute is introduced to define the scope of the type -->
+    </xsd:complexType>
+    <!-- definition of type LanguageType, defining the supported languages -->
+    <xsd:simpleType name="LanguageType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="en_en"/>
+            <xsd:enumeration value="en_us"/>
+            <!-- xsd:enumeration value="de_au"/ -->
+            <!-- xsd:enumeration value="de_de"/ -->
+        </xsd:restriction>
+    </xsd:simpleType>
+    <!-- definition of type ErrorType -->
+    <xsd:simpleType name="ErrorType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="informational"/>
+            <xsd:enumeration value="warning"/>
+            <xsd:enumeration value="error"/>
+            <xsd:enumeration value="fatal"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <!-- definition of type ErrorActionCode, defining the action to be performed-->
+    <xsd:simpleType name="ErrorActionCode">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="retry"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <!-- definition of type ErrorRecomendation, defining recommended action to
+		 solve the error, e. g. rety after delayed time
+	-->
+    <xsd:complexType name="ErrorRecomendation">
+        <xsd:sequence>
+            <xsd:element name="actionCode" type="spml:ErrorActionCode"/>
+            <!-- Release2: delay is optional - in cases where PGW has no possibility to estimate it -->
+            <xsd:element name="actionDelay" type="xsd:int" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <!-- definition of type .Info, used to report additional error information
+	-->
+    <xsd:complexType name="ErrorHintInfo">
+        <xsd:sequence>
+            <xsd:element name="partialSpmlRequest" type="xsd:string" minOccurs="0"/>
+            <xsd:sequence>
+                <!-- element ldapRequest is a string containing the LDAP request.
+					 it is NOT a machine readable string!
+				-->
+                <xsd:element name="ldapRequest" type="xsd:string" maxOccurs="unbounded"/>
+                <!-- element ldapResponse is a string containing the LDAP response 
+					 or error message. it is NOT a machine readable string!
+				-->
+                <xsd:element name="ldapResponse" type="xsd:string" maxOccurs="unbounded"/>
+            </xsd:sequence>
+        </xsd:sequence>
+    </xsd:complexType>
+    <!-- definition of the ValidationErrorHintInfo, used to report validation errors
+	-->
+    <xsd:complexType name="ValidationErrorHintInfo">
+        <xsd:sequence>
+            <!-- the location of invalid data line, column , etc. -->
+            <xsd:element name="location" type="xsd:string"/>
+            <!-- the name of the element that contains invalid data -->
+            <xsd:element name="itemName" type="xsd:string"/>
+            <!-- the detailed error message -->
+            <xsd:element name="violationDetail" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <!-- definition of type ErrorHintInfo, used to report additional error information
+	-->
+    <xsd:complexType name="ErrorHint">
+        <xsd:sequence>
+            <xsd:element name="spmlRequest" type="spml:SpmlRequest" minOccurs="0"/>
+            <xsd:element name="ldapInfo" type="spml:ErrorHintInfo" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="validationInfo" type="spml:ValidationErrorHintInfo" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <!-- definition of type SearchStatus, describing the status of the result set
+		 of a search response. possible values are:
+		 - completeResults, if the response contains the complete result set
+		 - maxSizeExceeded, if there are more results than can be returned in the response
+	-->
+    <xsd:simpleType name="SearchStatus">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="completeResult"/>
+            <xsd:enumeration value="maxSizeExceeded"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <!--************************************************************************-->
+    <!--  REQUEST SECTION                                                       -->
+    <!--************************************************************************-->
+     <!-- Base class: SpmlRequest -->
+    <xsd:complexType name="SpmlRequest">
+        <xsd:sequence>
+            <xsd:element name="operationalAttributes" type="spml:Attributes" minOccurs="0"/>
+            <!-- Release2: version string is introduced, e.g. HLR_SUBSCRIBER_v20 -->
+            <xsd:element name="version" type="xsd:string"/>
+        </xsd:sequence>
+        <xsd:attribute name="requestID" type="xsd:string" use="optional"/>
+        <xsd:attribute name="newGenerated" type="xsd:boolean" use="optional"/>
+        <xsd:attribute name="execution" type="spml:ExecutionType" use="optional"/>
+        <xsd:attribute name="callback" type="xsd:string" use="optional"/>
+        <xsd:attribute name="language" type="spml:LanguageType" use="optional"/>
+        <xsd:attribute name="timestamp" type="xsd:boolean" use="optional"/>
+    </xsd:complexType>
+    <!-- Base class: SpmlResponse -->
+    <xsd:complexType name="SpmlResponse">
+        <xsd:sequence>
+            <xsd:element name="operationalAttributes" type="spml:Attributes" minOccurs="0"/>
+            <!-- Release2: version string is introduced, e.g. HLR_SUBSCRIBER_v20 -->
+            <xsd:element name="version" type="xsd:string"/>
+            <xsd:element name="errorMessage" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="errorHint" type="spml:ErrorHint" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="errorRecomendation" type="spml:ErrorRecomendation" minOccurs="0"/>
+        </xsd:sequence>
+        <xsd:attribute name="result" type="spml:ResultCode" use="required"/>
+        <xsd:attribute name="requestID" type="xsd:string" use="optional"/>
+        <xsd:attribute name="errorType" type="spml:ErrorType" use="optional"/>
+        <xsd:attribute name="errorCode" type="xsd:string" use="optional"/>
+        <xsd:attribute name="language" type="spml:LanguageType" use="optional"/>
+        <xsd:attribute name="executionTime" type="xsd:long" use="required"/>
+        <xsd:attribute name="timestamp" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+    <!-- SpmlResponseConfirmation, used to confirm callback message -->
+    <xsd:complexType name="SpmlResponseConfirmation">
+        <xsd:attribute name="result" type="xsd:int" use="required"/>
+        <xsd:attribute name="requestID" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+    <!-- Definition of BatchableRequest: base class for objects that a batch request
+	 	 may contain 
+	-->
+    <xsd:complexType name="BatchableRequest">
+        <xsd:complexContent>
+            <xsd:extension base="spml:SpmlRequest"/>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="BatchableResponse">
+        <xsd:complexContent>
+            <xsd:extension base="spml:SpmlResponse"/>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <!-- Definition of AddRequest: Add first class object -->
+    <xsd:complexType name="AddRequest">
+        <xsd:complexContent>
+            <xsd:extension base="spml:BatchableRequest">
+                <xsd:sequence>
+                    <xsd:element name="object" type="spml:FirstClassObject"/>
+                </xsd:sequence>
+                <xsd:attribute name="returnResultingObject" type="spml:ReturnResultingObjectType" default="none"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <!-- Definition of AddResponse: First class object added-->
+    <xsd:complexType name="AddResponse">
+        <xsd:complexContent>
+            <xsd:extension base="spml:BatchableResponse">
+                <xsd:sequence>
+                    <xsd:element name="resultingObject" type="spml:FirstClassObject" minOccurs="0"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <!-- Definition of ModifyRequest: Perform given modifications -->
+    <xsd:complexType name="ModifyRequest">
+        <xsd:complexContent>
+            <xsd:extension base="spml:BatchableRequest">
+                <xsd:sequence>
+                    <!-- objectclass and identifier are mandatory (for SOAP SPML) -->
+                    <xsd:element name="objectclass" type="xsd:string"/>
+                    <xsd:element name="identifier" type="spml:Identifier"/>
+                    <!-- FCO can be used in modification element; modification must be at least 1 -->
+                    <xsd:element name="modification" type="spml:SpmlModification" maxOccurs="unbounded"/>
+                </xsd:sequence>
+                <xsd:attribute name="returnResultingObject" type="spml:ReturnResultingObjectType" default="none"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <!-- Definition of ModifyRequest: Given modifications performed -->
+    <xsd:complexType name="ModifyResponse">
+        <xsd:complexContent>
+            <xsd:extension base="spml:BatchableResponse">
+                <xsd:sequence>
+                    <xsd:element name="objectclass" type="xsd:string"/>
+                    <xsd:element name="identifier" type="spml:Identifier"/>
+                    <xsd:element name="resultingObject" type="spml:FirstClassObject" minOccurs="0"/>
+                    <xsd:element name="modification" type="spml:SpmlModification" minOccurs="0" maxOccurs="unbounded"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <!-- Definition of DeleteRequest: Delete object with given identifier -->
+    <xsd:complexType name="DeleteRequest">
+        <xsd:complexContent>
+            <xsd:extension base="spml:BatchableRequest">
+                <xsd:sequence>
+                    <xsd:element name="objectclass" type="xsd:string"/>
+                    <xsd:element name="identifier" type="spml:Identifier"/>
+                </xsd:sequence>
+                <xsd:attribute name="returnResultingObject" type="spml:ReturnResultingObjectType" default="none"/>
+                <!-- changed application specifc values to string-->
+                <xsd:attribute name="deleteScope" type="xsd:string" default="all"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <!-- Definition of DeleteResponse: Object deleted -->
+    <xsd:complexType name="DeleteResponse">
+        <xsd:complexContent>
+            <xsd:extension base="spml:BatchableResponse">
+                <xsd:sequence>
+                    <xsd:element name="objectclass" type="xsd:string"/>
+                    <xsd:element name="identifier" type="spml:Identifier"/>
+                    <xsd:element name="resultingObject" type="spml:FirstClassObject" minOccurs="0"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <!-- Definition of BatchRequest: Perform given BatchRequests
+	-->
+    <xsd:complexType name="BatchRequest">
+        <xsd:complexContent>
+            <xsd:extension base="spml:SpmlRequest">
+                <xsd:sequence>
+                    <xsd:element name="request" type="spml:BatchableRequest" minOccurs="0" maxOccurs="unbounded"/>
+                </xsd:sequence>
+                <xsd:attribute name="processing" type="spml:ProcessingType" use="optional" default="sequential"/>
+                <xsd:attribute name="onError" type="spml:OnErrorType" use="optional" default="exit_rollback"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <!-- definition of BatchResponse: May contain AddResponses, ModifyResponses
+		 or DeleteResponses only 
+	-->
+    <xsd:complexType name="BatchResponse">
+        <xsd:complexContent>
+            <xsd:extension base="spml:SpmlResponse">
+                <xsd:sequence>
+                    <xsd:element name="response" type="spml:BatchableResponse" minOccurs="0" maxOccurs="unbounded"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <!-- Definition of CancelRequest: Cancel request with given requestId -->
+    <xsd:complexType name="CancelRequest">
+        <xsd:complexContent>
+            <xsd:extension base="spml:SpmlRequest">
+                <xsd:sequence>
+                    <xsd:element name="cancelRequestId" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <!-- Definition of CancelResponse: Request cancelled -->
+    <xsd:complexType name="CancelResponse">
+        <xsd:complexContent>
+            <xsd:extension base="spml:SpmlResponse">
+                <xsd:sequence>
+                    <xsd:element name="cancelRequestId" type="xsd:string"/>
+                    <xsd:element name="cancelResult" type="spml:CancelResultType"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <!-- Definition of StatusRequest: Ask for status of request -->
+    <xsd:complexType name="StatusRequest">
+        <xsd:complexContent>
+            <xsd:extension base="spml:SpmlRequest">
+                <xsd:attribute name="statusReturns" type="spml:StatusReturnsType" use="optional" default="result"/>
+                <xsd:attribute name="requestedId" type="xsd:string" use="required"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <!-- definition of StatusResponse: may contain an AddResponse, ModifyResponse,
+		 SearchResponse, BatchResponse or DeleteResponse only 
+	-->
+    <xsd:complexType name="StatusResponse">
+        <xsd:complexContent>
+            <xsd:extension base="spml:SpmlResponse">
+                <xsd:sequence>
+                    <xsd:element name="requestedResponse" type="spml:SpmlResponse" minOccurs="0"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <!-- Release2: extend search for alias search -->
+    <xsd:complexType name="AliasType">
+        <xsd:attribute name="name" type="xsd:string" use="required"/>
+        <!-- changed type to string removed appl specific alias, application to redefine this --> 
+        <xsd:attribute name="value" type="xsd:string" use="required"/>
+    </xsd:complexType>    
+    <!-- definition of type SearchBase, defines either the objectclass to 
+		 be searched all a root instance (in the latter case all childs
+		 of the given objectclass will be searched 
+	-->
+    <xsd:complexType name="SearchBase">
+        <xsd:sequence>
+            <xsd:element name="objectclass" type="xsd:string"/>
+            <!-- Release2: replace identifier by alias -->
+            <!-- xsd:element name="identifier" type="xsd:string" minOccurs="0"/-->
+            <xsd:element name="alias" type="spml:AliasType" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <!-- Release2: DSML Filter definition for Search Request -->
+    
+    <xsd:complexType name="Filter">
+        <xsd:choice>
+            <xsd:element name="and" type="spml:FilterSet" minOccurs="0"/>
+            <xsd:element name="or" type="spml:FilterSet" minOccurs="0"/>
+            <xsd:element name="not" type="spml:Filter" minOccurs="0"/>
+            <xsd:element name="equalityMatch" type="spml:AttributeValueAssertion" minOccurs="0"/>
+            <xsd:element name="substrings" type="spml:SubstringFilter" minOccurs="0"/>
+            <xsd:element name="greaterOrEqual" type="spml:AttributeValueAssertion" minOccurs="0"/>
+            <xsd:element name="lessOrEqual" type="spml:AttributeValueAssertion" minOccurs="0"/>
+            <xsd:element name="present" type="spml:AttributeDescription" minOccurs="0"/>
+        </xsd:choice>   
+    </xsd:complexType>
+    <xsd:complexType name="FilterSet">
+        <xsd:sequence maxOccurs="unbounded">
+            <xsd:choice>
+                <xsd:element name="and" type="spml:FilterSet" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="or" type="spml:FilterSet" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="not" type="spml:Filter" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="equalityMatch" type="spml:AttributeValueAssertion" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="substrings" type="spml:SubstringFilter" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="greaterOrEqual" type="spml:AttributeValueAssertion" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="lessOrEqual" type="spml:AttributeValueAssertion" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="present" type="spml:AttributeDescription" minOccurs="0" maxOccurs="unbounded"/>
+            </xsd:choice>   
+        </xsd:sequence>   
+    </xsd:complexType>
+    
+    <xsd:complexType name="AttributeValueAssertion">
+        <xsd:sequence>
+            <xsd:element name="value" type="xsd:string"/>
+        </xsd:sequence>
+        <xsd:attribute name="name" type="xsd:string" use="required"/>
+    </xsd:complexType>
+    <xsd:complexType name="AttributeDescription">
+        <xsd:attribute name="name" type="xsd:string" use="required"/>
+    </xsd:complexType>
+    <xsd:complexType name="SubstringFilter">
+        <xsd:sequence>
+            <xsd:element name="initial" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="any" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="final" type="xsd:string" minOccurs="0"/>
+        </xsd:sequence>
+        <xsd:attribute name="name" type="xsd:string" use="required"/>
+    </xsd:complexType>
+    
+    <!-- Removed search support the same features as bulkRequest
+        <xsd:complexType name="SearchIdentifierFileNameType">
+        <xsd:simpleContent>
+            <xsd:restriction base="spml:IdentifierFileNameType">
+                <xsd:attribute name="alias" type="xsd:string" use="prohibited"/>
+            </xsd:restriction>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    -->
+    <!-- definition of SearchRequest -->
+    <xsd:complexType name="SearchRequest">
+        <xsd:complexContent>
+            <xsd:extension base="spml:SpmlRequest">
+                <xsd:sequence>
+                    <xsd:element name="base" type="spml:SearchBase"/>
+                    <!-- Release2: changed to DSML filter, maxOccurs only 1 -->
+                    <xsd:element name="filter" type="spml:Filter" minOccurs="0" maxOccurs="1"/>
+                    <xsd:element name="identifierListName" type="spml:IdentifierFileNameType" minOccurs="0"/>                    
+                    <!-- names of attributes to be returned in the response, if not set, returns all -->
+                    <xsd:sequence>
+                        <xsd:element name="returnAttribute" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+                    </xsd:sequence>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <!-- Definition of SearchResponse: Returns list of matching first class objects 
+		 NOTE: to be extended by filter results
+	-->
+    <xsd:complexType name="SearchResponse">
+        <xsd:complexContent>
+            <xsd:extension base="spml:SpmlResponse">
+                <xsd:sequence>
+                    <xsd:element name="objects" type="spml:FirstClassObject" minOccurs="0" maxOccurs="unbounded"/>
+                </xsd:sequence>
+                <xsd:attribute name="searchStatus" type="spml:SearchStatus" use="optional" default="completeResult"/>
+                <xsd:attribute name="responseFileStatus" type="spml:ResponseFileStatus" use="optional"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <!-- UNDO request not in release 1, leave it as a placeholder -->
+    <!-- definition of UndoRequest: Cancel request with given id -->
+    <!-- xsd:complexType name="UndoRequest">
+		<xsd:complexContent>
+			<xsd:extension base="spml:SpmlRequest">
+				<xsd:sequence>
+					<xsd:element name="undoRequestId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType -->
+    <!-- definition of UndoResponse -->
+    <!-- xsd:complexType name="UndoResponse">
+		<xsd:complexContent>
+			<xsd:extension base="spml:SpmlResponse">
+				<xsd:sequence>
+					<xsd:element name="undoRequestId" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="undoResult" type="spml:UndoResultCode"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType -->
+    <!-- UNDO request not in release 1, leave it as a placeholder -->
+    <!-- Release2: Type of changeIdRequest for sim card exchange -->
+    <!-- NOT needed now, can recast because used in attribute
+    <xsd:simpleType name="ChangeIdProceedingType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="immediate"/>
+            <xsd:enumeration value="seamless"/>
+            <xsd:enumeration value="rollback"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    -->
+    <!-- Definition of ChangeIdRequest : Changes id of a first class object -->
+    <xsd:complexType name="ChangeIdRequest">
+        <xsd:complexContent>
+            <xsd:extension base="spml:BatchableRequest">
+                <xsd:sequence>
+                    <xsd:element name="objectclass" type="xsd:string"/>
+                    <xsd:element name="oldId" type="spml:ID"/>
+                    <xsd:element name="newId" type="spml:ID"/>
+                </xsd:sequence>
+                <xsd:attribute name="returnResultingObject" type="spml:ReturnResultingObjectType" default="none"/>
+                <!-- change or application specific enums to string-->
+                <xsd:attribute name="changeIdProceeding" type="xsd:string" use="optional"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <!-- Definition of ChangeIdResponse -->
+    <xsd:complexType name="ChangeIdResponse">
+        <xsd:complexContent>
+            <xsd:extension base="spml:BatchableResponse">
+                <xsd:sequence>
+                    <xsd:element name="objectclass" type="xsd:string"/>
+                    <xsd:element name="oldId" type="spml:ID"/>
+                    <xsd:element name="newId" type="spml:ID"/>
+                    <xsd:element name="resultingObject" type="spml:FirstClassObject" minOccurs="0"/>
+                </xsd:sequence>
+            </xsd:extension>
+            <!-- Release2: Extension changed from SpmlResponse to BatchableResponse - it might be used in batchRequest -->
+        </xsd:complexContent>
+    </xsd:complexType>
+
+    <!--************************************************************************-->
+    <!--  Bulk interface specific requests SECTION                              -->
+    <!--************************************************************************-->
+
+    <xsd:simpleType name="BulkOperationType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="modify"/>
+            <xsd:enumeration value="delete"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:complexType name="BulkRequest">
+        <xsd:complexContent>
+            <xsd:extension base="spml:SpmlRequest">
+                <xsd:sequence>
+                    <xsd:element name="objectclass" type="xsd:string"/>
+                    <!-- Filter which identifies the FCOs for bulk processing -->
+                    <xsd:element name="filter" type="spml:Filter" minOccurs="0" maxOccurs="1"/>
+                    <!-- reference file name for defining identifier ranges -->
+                    <xsd:element name="identifierRangeFilename" type="spml:IdentifierFileNameType" minOccurs="0"/>
+                    <!-- FCO can be used in modification element -->
+                    <xsd:element name="modification" type="spml:SpmlModification" minOccurs="0" maxOccurs="unbounded"/>
+                </xsd:sequence>
+                <xsd:attribute name="operation" type="spml:BulkOperationType" use="required"/>
+                <!-- changed appl. specific enum to string -->
+                <xsd:attribute name="deleteScope" type="xsd:string" use="optional"/>
+                <xsd:attribute name="returnResultingObject" type="spml:ReturnResultingObjectType" default="identifier"/>                
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="BulkResponse">
+        <xsd:complexContent>
+            <xsd:extension base="spml:SpmlResponse">
+                <xsd:sequence>
+                    <xsd:element name="objectclass" type="xsd:string"/>
+                    <xsd:element name="resultingFilename" type="xsd:string"/>
+                    <xsd:element name="filter" type="spml:Filter" minOccurs="0" maxOccurs="1"/>
+                    <xsd:element name="modification" type="spml:SpmlModification" minOccurs="0" maxOccurs="unbounded"/>
+                </xsd:sequence>
+                <xsd:attribute name="operation" type="spml:BulkOperationType"/>
+                <!-- changed appl. specific enum to string -->
+                <xsd:attribute name="deleteScope" type="xsd:string" use="optional"/>                
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+
+    <!-- This is used only in the response file of the bulkRequest (NOT on SOAP interface) -->
+    <xsd:complexType name="BulkResponseFile">
+        <xsd:complexContent>
+            <xsd:extension base="spml:SpmlResponse">
+                <xsd:sequence>
+                    <!-- Contains the number of found objects in the PST based on the filter or identifier file -->
+                    <xsd:element name="numberOfAffectedObjects" type="xsd:int"/>
+                    <!-- holds the number of successfully finished operations -->
+                    <xsd:element name="numberOfSuccessfullOperations" type="xsd:int"/>
+                    <!-- only one of the below two responses can occur in the response - either modify or delete -->
+                    <xsd:element name="modifyResponse" type="spml:ModifyResponse" minOccurs="0" maxOccurs="unbounded"/>
+                    <xsd:element name="deleteResponse" type="spml:DeleteResponse" minOccurs="0" maxOccurs="unbounded"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+  
+  <!-- definition of new identifiers -->
+    <!-- ID type allows extensions e.g. with alias attribute , but it does  not define any extension here -->
+    <!-- ID is used for change ID request  -->
+    <xsd:complexType name="ID">
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:string">  
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    
+    <!-- Identifier type allows extensions e.g. with alias attribute, and it  also defines alias extension - allowing any alias value -->
+    <!-- Identifiier is used for search, modify and delete request. The alias without a specific type is used for old style clients -->
+    <xsd:complexType name="Identifier">
+        <xsd:simpleContent>
+            <xsd:extension base="spml:ID">  
+                <xsd:attribute name="alias" type="xsd:string"  use="optional"/>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+   
+   <xsd:simpleType name="IdentifierFilterType">
+       <xsd:restriction base="xsd:string">
+           <xsd:enumeration value="positive"/>
+           <xsd:enumeration value="negative"/>
+       </xsd:restriction>
+   </xsd:simpleType>
+    <xsd:complexType name="IdentifierFileNameType">
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:string">  
+                <xsd:attribute name="alias" type="xsd:string"  use="optional"/>
+                <xsd:attribute name="filterType" type="spml:IdentifierFilterType" default="positive" use="optional"></xsd:attribute>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>       
+                       
+    <xsd:complexType name="AbstractMigration">
+        <xsd:attribute name="application" type="xsd:string" use="required"/>
+    </xsd:complexType>
+    
+    <xsd:complexType name="MigrationRequest">
+        <xsd:complexContent>
+            <xsd:extension base="spml:SpmlRequest">
+                <xsd:sequence>
+                     <xsd:element name="objectclass" type="xsd:string"/>
+                    <xsd:element name="filter" type="spml:Filter" minOccurs="0"/>             
+                    <xsd:element name="migration" type="spml:AbstractMigration"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="MigrationResponse">
+        <xsd:complexContent>
+            <xsd:extension base="spml:SpmlResponse">
+                <xsd:sequence>
+                    <xsd:element name="affectedEntities" type="xsd:int" minOccurs="0"/>
+                    <xsd:element name="successfullyMigrated" type="xsd:int" minOccurs="0"/>
+                </xsd:sequence>
+                <xsd:attribute name="application" type="xsd:string" use="required"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+ 
+    <xsd:complexType name="MigrationOperationResponse">
+        <xsd:complexContent>
+            <xsd:extension base="spml:SpmlResponse">
+                <xsd:sequence>
+                    <xsd:element name="identifier" type="xsd:string" minOccurs="0"/>
+                    <!--                   <xsd:element name="timestamp" type="xsd:string" minOccurs="0"/>-->
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>  
+    
+ <!-- MASS UPDATE END-->
+  <!-- ENHANCED MASS SEARCH -->
+    <xsd:simpleType name="ResponseFileStatus">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="partialResult"/>
+            <xsd:enumeration value="finalResult"/>
+            <xsd:enumeration value="completeResult"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:complexType name="AbstractOperation">
+        <xsd:attribute name="type" type="xsd:string" use="required"/>
+    </xsd:complexType>
+    
+    <xsd:complexType name="ExtendedBulkRequest">
+        <xsd:complexContent>
+            <xsd:extension base="spml:SpmlRequest">
+                <xsd:sequence>
+                    <xsd:element name="objectclass" type="xsd:string"/>        
+                    <xsd:element name="filter" type="spml:Filter" minOccurs="0" maxOccurs="1"/>        
+                    <xsd:element name="identifierRangeFilename" type="spml:IdentifierFileNameType" minOccurs="0"/>                       
+                    <xsd:element name="bulkOperation" type="spml:AbstractOperation"/>
+                </xsd:sequence>      
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="ExtendedBulkResponse">
+        <xsd:complexContent>
+            <xsd:extension base="spml:SpmlResponse">
+                <xsd:sequence>
+                    <xsd:element name="objectclass" type="xsd:string"/>
+                    <xsd:element name="resultingFilename" type="xsd:string"/>       
+                    <xsd:element name="filter" type="spml:Filter" minOccurs="0" maxOccurs="1"/>                                      
+                    <xsd:element name="bulkOperation" type="spml:AbstractOperation"/>
+                </xsd:sequence>      
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+        
+    <xsd:complexType name="ExtendedBulkOperationResponse">
+        <xsd:complexContent>
+            <xsd:extension base="spml:SpmlResponse">
+                <xsd:sequence>
+                    <xsd:element name="identifier" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="timestamp" type="xsd:string" minOccurs="0"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>      
+
+    <xsd:complexType name="ExtendedBulkResponseFile">
+        <xsd:complexContent>
+            <xsd:extension base="spml:SpmlResponse">
+                <xsd:sequence>                
+                    <xsd:element name="numberOfAffectedObjects" type="xsd:int"/>                
+                    <xsd:element name="numberOfSuccessfullOperations" type="xsd:int"/>     
+                    <xsd:element name="response" type="spml:ExtendedBulkOperationResponse" minOccurs="0"
+                        maxOccurs="unbounded"/>
+                </xsd:sequence>                
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+   <xsd:complexType name="ExtendedRequest">
+        <xsd:complexContent>
+            <xsd:extension base="spml:BatchableRequest">
+                <xsd:sequence>
+                    <xsd:element name="operation" type="spml:AbstractOperation"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>   
+    
+    <xsd:complexType name="ExtendedResponse">
+        <xsd:complexContent>
+            <xsd:extension base="spml:BatchableResponse">
+                <xsd:sequence>
+                    <xsd:element name="operation" type="spml:AbstractOperation"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    
+    <!--************************************************************************-->
+    <!--  REQUEST ELEMENTS SECTION                                              -->
+    <!--************************************************************************-->
+    <xsd:element name="addRequest" type="spml:AddRequest"/>
+    <xsd:element name="addResponse" type="spml:AddResponse"/>
+    <xsd:element name="modifyRequest" type="spml:ModifyRequest"/>
+    <xsd:element name="modifyResponse" type="spml:ModifyResponse"/>
+    <xsd:element name="deleteRequest" type="spml:DeleteRequest"/>
+    <xsd:element name="deleteResponse" type="spml:DeleteResponse"/>
+    <xsd:element name="searchRequest" type="spml:SearchRequest"/>
+    <xsd:element name="searchResponse" type="spml:SearchResponse"/>
+    <xsd:element name="cancelRequest" type="spml:CancelRequest"/>
+    <xsd:element name="cancelResponse" type="spml:CancelResponse"/>
+    <xsd:element name="statusRequest" type="spml:StatusRequest"/>
+    <xsd:element name="statusResponse" type="spml:StatusResponse"/>
+    <xsd:element name="batchRequest" type="spml:BatchRequest"/>
+    <xsd:element name="batchResponse" type="spml:BatchResponse"/>
+    <!-- UNDO request not in release, leave it as a placeholder -->
+    <!-- xsd:element name="undoRequest" type="spml:UndoRequest"/ -->
+    <!-- xsd:element name="undoResponse" type="spml:UndoResponse"/ -->
+    <xsd:element name="changeIdRequest" type="spml:ChangeIdRequest"/>
+    <xsd:element name="changeIdResponse" type="spml:ChangeIdResponse"/>
+    <xsd:element name="responseConfirmation" type="spml:SpmlResponseConfirmation"/>
+    <!-- bulk related operations -->
+    <xsd:element name="bulkRequest" type="spml:BulkRequest"/>
+    <xsd:element name="bulkResponse" type="spml:BulkResponse"/>
+    <xsd:element name="bulkResponseFile" type="spml:BulkResponseFile"/>  
+    
+    <xsd:element name="extendedBulkRequest" type="spml:ExtendedBulkRequest"/>
+    <xsd:element name="extendedBulkOperationResponse" type="spml:ExtendedBulkOperationResponse"/>
+    <xsd:element name="extendedBulkResponse" type="spml:ExtendedBulkResponse"/>
+    <xsd:element name="extendedBulkResponseFile" type="spml:ExtendedBulkResponseFile"/>
+    
+    <!-- v30 migration Request -->
+    <xsd:element name="migrationRequest" type="spml:MigrationRequest"/>
+    <xsd:element name="migrationOperationResponse" type="spml:MigrationOperationResponse"/>
+    <xsd:element name="migrationResponse" type="spml:MigrationResponse"/>
+     
+    <xsd:element name="extendedRequest" type="spml:ExtendedRequest"/>
+    <xsd:element name="extendedResponse" type="spml:ExtendedResponse"/>
+</xsd:schema>

@@ -1,0 +1,662 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- edited with XMLSpy v2011 rel. 2 sp1 (x64) (http://www.altova.com) by Mohamed Shahat (Home) -->
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	 xmlns:pcrf="http://xmlns.vfe.com.eg/middleware/PCRF/ModelSchema"
+	 xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	 targetNamespace="http://xmlns.vfe.com.eg/middleware/PCRF/ModelSchema"
+	 elementFormDefault="qualified"
+	 attributeFormDefault="unqualified">
+
+	<!-- 
+************************************************************************
+		PCRF Model root Elements                                                                      
+************************************************************************
+-->
+	<element name="SPccSubscriber" type="pcrf:SPccSubscriber"/>
+	<element name="SQuotaDefinition" type="pcrf:SQuotaDefinition"/>
+
+	<!--  PCRF Operations root element -->
+	<element name="OperationsPCRF" type="pcrf:OperationsPCRF"/>
+
+	<!-- 
+************************************************************************
+          PCRF Operations Request/Response                           
+************************************************************************
+-->
+	<complexType name="OperationsPCRF">
+		<sequence>
+			<element name="addSubscriberOp" minOccurs="0">
+				<complexType>
+					<sequence>
+						<element ref="pcrf:addSubscriberOpRequest" minOccurs="0"/>
+						<element ref="pcrf:addSubscriberOpResponse" minOccurs="0"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="addSubscriberAliasOp" minOccurs="0">
+				<complexType>
+					<sequence>
+						<element ref="pcrf:addSubscriberAliasOpRequest" minOccurs="0"/>
+						<element ref="pcrf:addSubscriberAliasOpResponse" minOccurs="0"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="delSubscriberOp" minOccurs="0">
+				<complexType>
+					<sequence>
+						<element ref="pcrf:delSubscriberOpRequest" minOccurs="0"/>
+						<element ref="pcrf:delSubscriberOpResponse" minOccurs="0"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="delSubscriberAliasOp" minOccurs="0">
+				<complexType>
+					<sequence>
+						<element ref="pcrf:delSubscriberAliasOpRequest" minOccurs="0"/>
+						<element ref="pcrf:delSubscriberAliasOpResponse" minOccurs="0"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="getSubscriberOp" minOccurs="0">
+				<complexType>
+					<sequence>
+						<element ref="pcrf:getSubscriberOpRequest" minOccurs="0"/>
+						<element ref="pcrf:getSubscriberOpResponse" minOccurs="0"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="getSubscriberAllServiceOp" minOccurs="0">
+				<complexType>
+					<sequence>
+						<element ref="pcrf:getSubscriberAllServiceOpRequest" minOccurs="0"/>
+						<element ref="pcrf:getSubscriberAllServiceOpResponse" minOccurs="0"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="getSubscriberAllServicePackageOp" minOccurs="0">
+				<complexType>
+					<sequence>
+						<element ref="pcrf:getSubscriberAllServicePackageOpRequest" minOccurs="0"/>
+						<element ref="pcrf:getSubscriberAllServicePackageOpResponse" minOccurs="0"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="getSubscriberAllQuotaOp" minOccurs="0">
+				<complexType>
+					<sequence>
+						<element ref="pcrf:getSubscriberAllQuotaOpRequest" minOccurs="0"/>
+						<element ref="pcrf:getSubscriberAllQuotaOpResponse" minOccurs="0"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="getSubscriberAllInfOp" minOccurs="0">
+				<complexType>
+					<sequence>
+						<element ref="pcrf:getSubscriberAllInfOpRequest" minOccurs="0"/>
+						<element ref="pcrf:getSubscriberAllInfOpResponse" minOccurs="0"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="getSubscriberSpecQuotaOp" minOccurs="0">
+				<complexType>
+					<sequence>
+						<element ref="pcrf:getSubscriberSpecQuotaOpRequest" minOccurs="0"/>
+						<element ref="pcrf:getSubscriberSpecQuotaOpResponse" minOccurs="0"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="getSubscriberAccountOp" minOccurs="0">
+				<complexType>
+					<sequence>
+						<element ref="pcrf:getSubscriberAccountOpRequest" minOccurs="0"/>
+						<element ref="pcrf:getSubscriberAccountOpResponse" minOccurs="0"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="getSubscriberAliasOp" minOccurs="0">
+				<complexType>
+					<sequence>
+						<element ref="pcrf:getSubscriberAliasOpRequest" minOccurs="0"/>
+						<element ref="pcrf:getSubscriberAliasOpResponse" minOccurs="0"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="rechargeSubscriberQuotaOp" minOccurs="0">
+				<complexType>
+					<sequence>
+						<element ref="pcrf:rechargeSubscriberQuotaOpRequest" minOccurs="0"/>
+						<element ref="pcrf:rechargeSubscriberQuotaOpResponse" minOccurs="0"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="subscribeServiceOp" minOccurs="0">
+				<complexType>
+					<sequence>
+						<element ref="pcrf:subscribeServiceOpRequest" minOccurs="0"/>
+						<element ref="pcrf:subscribeServiceOpResponse" minOccurs="0"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="subscribeServicePackageOp" minOccurs="0">
+				<complexType>
+					<sequence>
+						<element ref="pcrf:subscribeServicePackageOpRequest" minOccurs="0"/>
+						<element ref="pcrf:subscribeServicePackageOpResponse" minOccurs="0"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="unSubscribeServiceOp" minOccurs="0">
+				<complexType>
+					<sequence>
+						<element ref="pcrf:unSubscribeServiceOpRequest" minOccurs="0"/>
+						<element ref="pcrf:unSubscribeServiceOpResponse" minOccurs="0"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="unSubscribeServicePackageOp" minOccurs="0">
+				<complexType>
+					<sequence>
+						<element ref="pcrf:unSubscribeServicePackageOpRequest" minOccurs="0"/>
+						<element ref="pcrf:unSubscribeServicePackageOpResponse" minOccurs="0"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="updateSubscriberOp" minOccurs="0">
+				<complexType>
+					<sequence>
+						<element ref="pcrf:updateSubscriberOpRequest" minOccurs="0"/>
+						<element ref="pcrf:updateSubscriberOpResponse" minOccurs="0"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="updateSubscriberAccountOp" minOccurs="0">
+				<complexType>
+					<sequence>
+						<element ref="pcrf:updateSubscriberAccountOpRequest" minOccurs="0"/>
+						<element ref="pcrf:updateSubscriberAccountOpResponse" minOccurs="0"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="updateSubscribedServicePackageOp" minOccurs="0">
+				<complexType>
+					<sequence>
+						<element ref="pcrf:updateSubscribedServicePackageOpRequest" minOccurs="0"/>
+						<element ref="pcrf:updateSubscribedServicePackageOpResponse" minOccurs="0"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="updateSubscriberAliasOp" minOccurs="0">
+				<complexType>
+					<sequence>
+						<element ref="pcrf:updateSubscriberAliasOpRequest" minOccurs="0"/>
+						<element ref="pcrf:updateSubscriberAliasOpResponse" minOccurs="0"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="updateSubSubscriptionOp" minOccurs="0">
+				<complexType>
+					<sequence>
+						<element ref="pcrf:updateSubSubscriptionOpRequest" minOccurs="0"/>
+						<element ref="pcrf:updateSubSubscriptionOpResponse" minOccurs="0"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="updateSubscriberQuotaOp" minOccurs="0">
+				<complexType>
+					<sequence>
+						<element ref="pcrf:updateSubscriberQuotaOpRequest" minOccurs="0"/>
+						<element ref="pcrf:updateSubscriberQuotaOpResponse" minOccurs="0"/>
+					</sequence>
+				</complexType>
+			</element>
+		</sequence>
+	</complexType>
+
+	<!-- 
+************************************************************************
+		PCRF Operations Request/Response Elements
+************************************************************************
+-->
+	<element name="addSubscriberOpRequest" type="pcrf:addSubscriberOpRequest"/>
+	<element name="addSubscriberOpResponse" type="pcrf:addSubscriberOpResponse"/>
+	<element name="addSubscriberAliasOpRequest" type="pcrf:addSubscriberAliasOpRequest"/>
+	<element name="addSubscriberAliasOpResponse" type="pcrf:addSubscriberAliasOpResponse"/>
+	<element name="delSubscriberOpRequest" type="pcrf:delSubscriberOpRequest"/>
+	<element name="delSubscriberOpResponse" type="pcrf:delSubscriberOpResponse"/>
+	<element name="delSubscriberAliasOpRequest" type="pcrf:delSubscriberAliasOpRequest"/>
+	<element name="delSubscriberAliasOpResponse" type="pcrf:delSubscriberAliasOpResponse"/>
+	<element name="getSubscriberOpRequest" type="pcrf:getSubscriberOpRequest"/>
+	<element name="getSubscriberOpResponse" type="pcrf:getSubscriberOpResponse"/>
+	<element name="getSubscriberAllServiceOpRequest" type="pcrf:getSubscriberAllServiceOpRequest"/>
+	<element name="getSubscriberAllServiceOpResponse" type="pcrf:getSubscriberAllServiceOpResponse"/>
+	<element name="getSubscriberAllServicePackageOpRequest" type="pcrf:getSubscriberAllServicePackageOpRequest"/>
+	<element name="getSubscriberAllServicePackageOpResponse" type="pcrf:getSubscriberAllServicePackageOpResponse"/>
+	<element name="getSubscriberAllQuotaOpRequest" type="pcrf:getSubscriberAllQuotaOpRequest"/>
+	<element name="getSubscriberAllQuotaOpResponse" type="pcrf:getSubscriberAllQuotaOpResponse"/>
+	<element name="getSubscriberAllInfOpRequest" type="pcrf:getSubscriberAllInfOpRequest"/>
+	<element name="getSubscriberAllInfOpResponse" type="pcrf:getSubscriberAllInfOpResponse"/>
+	<element name="getSubscriberSpecQuotaOpRequest" type="pcrf:getSubscriberSpecQuotaOpRequest"/>
+	<element name="getSubscriberSpecQuotaOpResponse" type="pcrf:getSubscriberSpecQuotaOpResponse"/>
+	<element name="getSubscriberAccountOpRequest" type="pcrf:getSubscriberAccountOpRequest"/>
+	<element name="getSubscriberAccountOpResponse" type="pcrf:getSubscriberAccountOpResponse"/>
+	<element name="getSubscriberAliasOpRequest" type="pcrf:getSubscriberAliasOpRequest"/>
+	<element name="getSubscriberAliasOpResponse" type="pcrf:getSubscriberAliasOpResponse"/>
+	<element name="rechargeSubscriberQuotaOpRequest" type="pcrf:rechargeSubscriberQuotaOpRequest"/>
+	<element name="rechargeSubscriberQuotaOpResponse" type="pcrf:rechargeSubscriberQuotaOpResponse"/>
+	<element name="subscribeServiceOpRequest" type="pcrf:subscribeServiceOpRequest"/>
+	<element name="subscribeServiceOpResponse" type="pcrf:subscribeServiceOpResponse"/>
+	<element name="subscribeServicePackageOpRequest" type="pcrf:subscribeServicePackageOpRequest"/>
+	<element name="subscribeServicePackageOpResponse" type="pcrf:subscribeServicePackageOpResponse"/>
+	<element name="unSubscribeServiceOpRequest" type="pcrf:unSubscribeServiceOpRequest"/>
+	<element name="unSubscribeServiceOpResponse" type="pcrf:unSubscribeServiceOpResponse"/>
+	<element name="unSubscribeServicePackageOpRequest" type="pcrf:unSubscribeServicePackageOpRequest"/>
+	<element name="unSubscribeServicePackageOpResponse" type="pcrf:unSubscribeServicePackageOpResponse"/>
+	<element name="updateSubscriberOpRequest" type="pcrf:updateSubscriberOpRequest"/>
+	<element name="updateSubscriberOpResponse" type="pcrf:updateSubscriberOpResponse"/>
+	<element name="updateSubscriberAccountOpRequest" type="pcrf:updateSubscriberAccountOpRequest"/>
+	<element name="updateSubscriberAccountOpResponse" type="pcrf:updateSubscriberAccountOpResponse"/>
+	<element name="updateSubscribedServicePackageOpRequest" type="pcrf:updateSubscribedServicePackageOpRequest"/>
+	<element name="updateSubscribedServicePackageOpResponse" type="pcrf:updateSubscribedServicePackageOpResponse"/>
+	<element name="updateSubscriberAliasOpRequest" type="pcrf:updateSubscriberAliasOpRequest"/>
+	<element name="updateSubscriberAliasOpResponse" type="pcrf:updateSubscriberAliasOpResponse"/>
+	<element name="updateSubSubscriptionOpRequest" type="pcrf:updateSubSubscriptionOpRequest"/>
+	<element name="updateSubSubscriptionOpResponse" type="pcrf:updateSubSubscriptionOpResponse"/>
+	<element name="updateSubscriberQuotaOpRequest" type="pcrf:updateSubscriberQuotaOpRequest"/>
+	<element name="updateSubscriberQuotaOpResponse" type="pcrf:updateSubscriberQuotaOpResponse"/>
+
+	<!--
+************************************************************************
+		PCRF Operations Request/Response ComplexTypes
+************************************************************************
+-->
+	<element name="qtaName" type="xsd:string"/>
+	<element name="ResultCode" type="xsd:string"/>
+	<element name="srvName" type="xsd:string"/>
+	<element name="srvpkgName" type="xsd:string"/>
+	<element name="srvpkgStartDateTime" type="xsd:string"/>
+	<element name="srvpkgEndDateTime" type="xsd:string"/>
+	<complexType name="addSubscriberOpRequest">
+		<sequence>
+			<element ref="pcrf:SPccSubscriber"/>
+		</sequence>
+	</complexType>
+	<complexType name="addSubscriberOpResponse">
+		<sequence>
+			<element ref="pcrf:ResultCode" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="addSubscriberAliasOpRequest">
+		<sequence>
+			<element ref="pcrf:SSubscriberAlias"/>
+		</sequence>
+	</complexType>
+	<complexType name="addSubscriberAliasOpResponse">
+		<sequence>
+			<element ref="pcrf:ResultCode" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="delSubscriberOpRequest">
+		<sequence>
+			<element ref="pcrf:usrIdentifier"/>
+		</sequence>
+	</complexType>
+	<complexType name="delSubscriberOpResponse">
+		<sequence>
+			<element ref="pcrf:ResultCode" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="delSubscriberAliasOpRequest">
+		<sequence>
+			<element ref="pcrf:SSubscriberAlias"/>
+		</sequence>
+	</complexType>
+	<complexType name="delSubscriberAliasOpResponse">
+		<sequence>
+			<element ref="pcrf:ResultCode" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="getSubscriberOpRequest">
+		<sequence>
+			<element ref="pcrf:usrIdentifier"/>
+		</sequence>
+	</complexType>
+	<element name="usrIdentifier" type="xsd:string"/>
+	<complexType name="getSubscriberOpResponse">
+		<sequence>
+			<element ref="pcrf:ResultCode" minOccurs="0"/>
+			<element ref="pcrf:SPccSubscriber"/>
+		</sequence>
+	</complexType>
+	<complexType name="getSubscriberAllServiceOpRequest">
+		<sequence>
+			<element ref="pcrf:usrIdentifier"/>
+		</sequence>
+	</complexType>
+	<complexType name="getSubscriberAllServiceOpResponse">
+		<sequence>
+			<element ref="pcrf:ResultCode" minOccurs="0"/>
+			<element ref="pcrf:SSubscriberService" minOccurs="0" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<complexType name="getSubscriberAllServicePackageOpRequest">
+		<sequence>
+			<element ref="pcrf:usrIdentifier"/>
+		</sequence>
+	</complexType>
+	<complexType name="getSubscriberAllServicePackageOpResponse">
+		<sequence>
+			<element ref="pcrf:ResultCode" minOccurs="0"/>
+			<element ref="pcrf:SSubscriberServicePackage" minOccurs="0" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<complexType name="getSubscriberAllQuotaOpRequest">
+		<sequence>
+			<element ref="pcrf:usrIdentifier"/>
+		</sequence>
+	</complexType>
+	<complexType name="getSubscriberAllQuotaOpResponse">
+		<sequence>
+			<element ref="pcrf:ResultCode" minOccurs="0"/>
+			<element ref="pcrf:SSubscriberQuota"/>
+		</sequence>
+	</complexType>
+	<complexType name="getSubscriberAllInfOpRequest">
+		<sequence>
+			<element ref="pcrf:usrIdentifier"/>
+		</sequence>
+	</complexType>
+	<complexType name="getSubscriberAllInfOpResponse">
+		<sequence>
+			<element ref="pcrf:ResultCode" minOccurs="0"/>
+			<element ref="pcrf:SPccSubscriber" minOccurs="0"/>
+			<element ref="pcrf:SSubscriberServicePackage" minOccurs="0"/>
+			<element ref="pcrf:SSubscriberService" minOccurs="0"/>
+			<element ref="pcrf:SSubscriberQuota" minOccurs="0"/>
+			<element ref="pcrf:SSubscriberAccount" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="getSubscriberSpecQuotaOpRequest">
+		<sequence>
+			<element ref="pcrf:usrIdentifier"/>
+			<element ref="pcrf:qtaName"/>
+		</sequence>
+	</complexType>
+	<complexType name="getSubscriberSpecQuotaOpResponse">
+		<sequence>
+			<element ref="pcrf:ResultCode" minOccurs="0"/>
+			<element ref="pcrf:SSubscriberQuota"/>
+		</sequence>
+	</complexType>
+	<complexType name="getSubscriberAccountOpRequest">
+		<sequence>
+			<element ref="pcrf:usrIdentifier"/>
+		</sequence>
+	</complexType>
+	<complexType name="getSubscriberAccountOpResponse">
+		<sequence>
+			<element ref="pcrf:ResultCode" minOccurs="0"/>
+			<element ref="pcrf:SSubscriberAccount"/>
+		</sequence>
+	</complexType>
+	<complexType name="getSubscriberAliasOpRequest">
+		<sequence>
+			<element ref="pcrf:usrIdentifier"/>
+		</sequence>
+	</complexType>
+	<complexType name="getSubscriberAliasOpResponse">
+		<sequence>
+			<element ref="pcrf:ResultCode" minOccurs="0"/>
+			<element ref="pcrf:SSubscriberAlias"/>
+		</sequence>
+	</complexType>
+	<complexType name="rechargeSubscriberQuotaOpRequest">
+		<sequence>
+			<element ref="pcrf:usrIdentifier"/>
+			<element ref="pcrf:SSubscriberRechargedQuota"/>
+		</sequence>
+	</complexType>
+	<complexType name="rechargeSubscriberQuotaOpResponse">
+		<sequence>
+			<element ref="pcrf:ResultCode" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="subscribeServiceOpRequest">
+		<sequence>
+			<element ref="pcrf:usrIdentifier"/>
+			<element ref="pcrf:SSubscriberService"/>
+		</sequence>
+	</complexType>
+	<complexType name="subscribeServiceOpResponse">
+		<sequence>
+			<element ref="pcrf:ResultCode" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="subscribeServicePackageOpRequest">
+		<sequence>
+			<element ref="pcrf:usrIdentifier"/>
+			<element ref="pcrf:srvpkgName"/>
+			<element ref="pcrf:srvpkgStartDateTime" minOccurs="0"/>
+			<element ref="pcrf:srvpkgEndDateTime" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="subscribeServicePackageOpResponse">
+		<sequence>
+			<element ref="pcrf:ResultCode" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="unSubscribeServiceOpRequest">
+		<sequence>
+			<element ref="pcrf:usrIdentifier"/>
+			<element ref="pcrf:srvName"/>
+		</sequence>
+	</complexType>
+	<complexType name="unSubscribeServiceOpResponse">
+		<sequence>
+			<element ref="pcrf:ResultCode" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="unSubscribeServicePackageOpRequest">
+		<sequence>
+			<element ref="pcrf:usrIdentifier"/>
+			<element ref="pcrf:srvpkgName"/>
+		</sequence>
+	</complexType>
+	<complexType name="unSubscribeServicePackageOpResponse">
+		<sequence>
+			<element ref="pcrf:ResultCode" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="updateSubscriberOpRequest">
+		<sequence>
+			<element ref="pcrf:SPccSubscriber"/>
+		</sequence>
+	</complexType>
+	<complexType name="updateSubscriberOpResponse">
+		<sequence>
+			<element ref="pcrf:ResultCode" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="updateSubscriberAccountOpRequest">
+		<sequence>
+			<element ref="pcrf:usrIdentifier"/>
+			<element ref="pcrf:SSubscriberAccount"/>
+		</sequence>
+	</complexType>
+	<complexType name="updateSubscriberAccountOpResponse">
+		<sequence>
+			<element ref="pcrf:ResultCode" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="updateSubscribedServicePackageOpRequest">
+		<sequence>
+			<element ref="pcrf:usrIdentifier"/>
+			<element ref="pcrf:srvpkgName"/>
+		</sequence>
+	</complexType>
+	<complexType name="updateSubscribedServicePackageOpResponse">
+		<sequence>
+			<element ref="pcrf:ResultCode" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="updateSubscriberAliasOpRequest">
+		<sequence>
+			<element ref="pcrf:SSubscriberAlias"/>
+		</sequence>
+	</complexType>
+	<complexType name="updateSubscriberAliasOpResponse">
+		<sequence>
+			<element ref="pcrf:ResultCode" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="updateSubSubscriptionOpRequest">
+		<sequence>
+			<element ref="pcrf:usrIdentifier"/>
+			<element ref="pcrf:SSubscriberService"/>
+		</sequence>
+	</complexType>
+	<complexType name="updateSubSubscriptionOpResponse">
+		<sequence>
+			<element ref="pcrf:ResultCode" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="updateSubscriberQuotaOpRequest">
+		<sequence>
+			<element ref="pcrf:usrIdentifier"/>
+			<element ref="pcrf:SSubscriberQuota"/>
+		</sequence>
+	</complexType>
+	<complexType name="updateSubscriberQuotaOpResponse">
+		<sequence>
+			<element ref="pcrf:ResultCode" minOccurs="0"/>
+		</sequence>
+	</complexType>
+
+	<!-- 
+************************************************************************
+		PCRF Model Elements                                                                      
+************************************************************************
+-->
+	<element name="SSubscriberService" type="pcrf:SSubscriberService"/>
+	<element name="SSubscriberAlias" type="pcrf:SSubscriberAlias"/>
+	<element name="SSubscriberServicePackage" type="pcrf:SSubscriberServicePackage"/>
+	<element name="SSubscriberQuota" type="pcrf:SSubscriberQuota"/>
+	<element name="SSubscriberAccount" type="pcrf:SSubscriberAccount"/>
+	<element name="SServicePackageDefinition" type="pcrf:SServicePackageDefinition"/>
+	<element name="SServiceDefinition" type="pcrf:SServiceDefinition"/>
+	<element name="SSubscriberRechargedQuota" type="pcrf:SSubscriberRechargedQuota"/>
+
+	<!-- 
+************************************************************************
+		PCRF Model Complex Types
+************************************************************************
+-->
+	<complexType name="SPccSubscriber">
+		<sequence>
+			<element name="usrIdentifier" type="xsd:string"/>
+			<element name="oldusrIdentifier" type="xsd:string" minOccurs="0"/>
+			<element name="usrMSISDN" type="xsd:string" minOccurs="0"/>
+			<element name="usrState" type="xsd:string" minOccurs="0"/>
+			<element name="usrHomeSrvZone" type="xsd:string" minOccurs="0"/>
+			<element name="usrPaidType" type="xsd:string" minOccurs="0"/>
+			<element name="usrCategory" type="xsd:string" minOccurs="0"/>
+			<element name="usrStation" type="xsd:string" minOccurs="0"/>
+			<element name="usrMasterIdentifier" type="xsd:string" minOccurs="0"/>
+			<element name="usrContactMethod" type="xsd:string" minOccurs="0"/>
+			<element name="usrEmailAddress" type="xsd:string" minOccurs="0"/>
+			<element name="usrBillCycleDate" type="xsd:string" minOccurs="0"/>
+			<element name="usrCreateType" type="xsd:string" minOccurs="0"/>
+			<element ref="pcrf:SSubscriberAccount" minOccurs="0"/>
+			<element ref="pcrf:SSubscriberService" minOccurs="0" maxOccurs="unbounded"/>
+			<element ref="pcrf:SSubscriberQuota" minOccurs="0" maxOccurs="unbounded"/>
+			<element ref="pcrf:SSubscriberServicePackage" minOccurs="0" maxOccurs="unbounded"/>
+			<element ref="pcrf:SSubscriberAlias" minOccurs="0" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+
+	<!--	UPCC	Obseleted		<element ref="pcrf:SSubscriberAlias" minOccurs="0" maxOccurs="unbounded"/> -->
+	<complexType name="SSubscriberService">
+		<sequence>
+			<element name="usrIdentifier" type="xsd:string"/>
+			<element name="srvName" type="xsd:string"/>
+			<element ref="pcrf:srvpkgName" minOccurs="0"/>
+			<element name="srvUsageState" type="xsd:string" minOccurs="0"/>
+			<element name="srvSubscribeDate" type="xsd:string" minOccurs="0"/>
+			<element name="srvOverdueDate" type="xsd:string" minOccurs="0"/>
+			<element name="srvStartDateTime" type="xsd:string" minOccurs="0"/>
+			<element name="srvEndDateTime" type="xsd:string" minOccurs="0"/>
+			<element name="srvRoamingType" type="xsd:string" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="SSubscriberAlias">
+		<sequence>
+			<element name="usrIdentifier" type="xsd:string"/>
+			<element name="aliasType" type="xsd:string"/>
+			<element name="aliasValue" type="xsd:string"/>
+			<element name="aliasExpireDate" type="xsd:string" minOccurs="0"/>
+			<element name="aliasStatus" type="xsd:string" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="SSubscriberServicePackage">
+		<sequence>
+			<element name="usrIdentifier" type="xsd:string"/>
+			<element name="srvpkgName" type="xsd:string"/>
+			<element name="srvpkgSubscribeDate" type="xsd:string" minOccurs="0"/>
+			<element name="srvpkgOverdueDate" type="xsd:string" minOccurs="0"/>
+			<element name="srvpkgStartDateTime" type="xsd:string" minOccurs="0"/>
+			<element name="srvpkgEndDateTime" type="xsd:string" minOccurs="0"/>
+			<element name="srvpkgRoamingType" type="xsd:string" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="SSubscriberQuota">
+		<sequence>
+			<element name="usrIdentifier" type="xsd:string"/>
+			<element name="qtaName" type="xsd:string"/>
+			<element name="srvName" type="xsd:string" minOccurs="0"/>
+			<element name="qtaValue" type="xsd:string" minOccurs="0"/>
+			<element name="qtaBalance" type="xsd:string" minOccurs="0"/>
+			<element name="qtaConsumption" type="xsd:string" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="SSubscriberAccount">
+		<sequence>
+			<element name="usrIdentifier" type="xsd:string"/>
+			<element name="actValue" type="xsd:string" minOccurs="0"/>
+			<element name="actBalance" type="xsd:string" minOccurs="0"/>
+			<element name="actConsumption" type="xsd:string" minOccurs="0"/>
+			<element name="actStatus" type="xsd:string" minOccurs="0"/>
+			<element name="actPrivilege" type="xsd:string" minOccurs="0"/>
+			<element name="actExpireDate" type="xsd:string" minOccurs="0"/>
+			<element name="actPersonalizedValue" type="xsd:string" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="SServicePackageDefinition">
+		<sequence>
+			<element name="srvpkgName" type="xsd:string"/>
+			<element name="srvName" type="xsd:string"/>
+			<element ref="pcrf:SSubscriberServicePackage" minOccurs="0" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<complexType name="SServiceDefinition">
+		<sequence>
+			<element name="srvName" type="xsd:string"/>
+			<element name="serviceDefinition" type="xsd:string"/>
+			<element ref="pcrf:SServicePackageDefinition" minOccurs="0" maxOccurs="unbounded"/>
+			<element ref="pcrf:SSubscriberService" minOccurs="0" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<complexType name="SQuotaDefinition">
+		<sequence>
+			<element name="qtaName" type="xsd:string"/>
+			<element name="quotaDefinition" type="xsd:string"/>
+			<element ref="pcrf:SServiceDefinition" minOccurs="0" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<complexType name="SSubscriberRechargedQuota">
+		<sequence>
+			<element name="qtaName" type="xsd:string"/>
+			<element name="rechargedValue" type="xsd:string"/>
+			<element name="qtaClass" type="xsd:string"/>
+		</sequence>
+	</complexType>
+</schema>

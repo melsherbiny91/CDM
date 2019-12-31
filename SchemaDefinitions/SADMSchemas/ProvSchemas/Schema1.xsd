@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:ns1="http://nsn.com/DeviceManagement/wsdl/Common/2.0"
+	 xmlns:tns="http://nsn.com/DeviceManagement/wsdl/Provisioning/2.0"
+	 xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	 targetNamespace="http://nsn.com/DeviceManagement/wsdl/Provisioning/2.0"
+	 version="1.0"
+	 elementFormDefault="unqualified"
+	 attributeFormDefault="unqualified">
+	<xs:import namespace="http://nsn.com/DeviceManagement/wsdl/Common/2.0" schemaLocation="Schema4.xsd"/>
+	<xs:element name="DMException" type="ns1:DMException" nillable="true"/>
+	<xs:element name="getCustomProvisionedServices" type="tns:getCustomProvisionedServices"/>
+	<xs:element name="getCustomProvisionedServicesResponse" type="tns:getCustomProvisionedServicesResponse"/>
+	<xs:element name="getNCSProvisioningDocument" type="tns:getNCSProvisioningDocument"/>
+	<xs:element name="getNCSProvisioningDocumentResponse" type="tns:getNCSProvisioningDocumentResponse"/>
+	<xs:element name="getScenario" type="tns:getScenario"/>
+	<xs:element name="getScenarioNames" type="tns:getScenarioNames"/>
+	<xs:element name="getScenarioNamesResponse" type="tns:getScenarioNamesResponse"/>
+	<xs:element name="getScenarioResponse" type="tns:getScenarioResponse"/>
+	<xs:element name="settingDeleteScanned" type="ns1:SettingDeleteScannedAction"/>
+	<xs:element name="submitNetworkTrigger" type="tns:submitNetworkTrigger"/>
+	<xs:element name="submitNetworkTriggerResponse" type="tns:submitNetworkTriggerResponse"/>
+	<xs:element name="submitProvisionReq" type="tns:submitProvisionReq"/>
+	<xs:element name="submitProvisionReqResponse" type="tns:submitProvisionReqResponse"/>
+	<xs:element name="submitProvisionRequest" type="tns:submitProvisionRequest"/>
+	<xs:element name="submitProvisionRequestResponse" type="tns:submitProvisionRequestResponse"/>
+	<xs:element name="submitProvisioningRequest" type="tns:submitProvisioningRequest"/>
+	<xs:element name="submitProvisioningRequestResponse" type="tns:submitProvisioningRequestResponse"/>
+	<xs:complexType name="submitNetworkTrigger">
+		<xs:sequence>
+			<xs:element name="msisdn" type="xs:string" minOccurs="0"/>
+			<xs:element name="imei" type="xs:string" minOccurs="0"/>
+			<xs:element name="imsi" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="submitNetworkTriggerResponse"/>
+	<xs:complexType name="getNCSProvisioningDocument">
+		<xs:sequence>
+			<xs:element name="userName" type="xs:string" minOccurs="0"/>
+			<xs:element name="userPassword" type="xs:string" minOccurs="0"/>
+			<xs:element name="xWapProfile" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="getNCSProvisioningDocumentResponse">
+		<xs:sequence>
+			<xs:element name="return" type="xs:base64Binary" nillable="true" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="getScenarioNames">
+		<xs:sequence>
+			<xs:element name="subscription" type="ns1:Subscription" minOccurs="0"/>
+			<xs:element name="device" type="ns1:Device" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="getScenarioNamesResponse">
+		<xs:sequence>
+			<xs:element name="return" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="getCustomProvisionedServices">
+		<xs:sequence>
+			<xs:element name="ID" type="xs:long"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="getCustomProvisionedServicesResponse">
+		<xs:sequence>
+			<xs:element name="return" type="ns1:setting" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="submitProvisioningRequest">
+		<xs:sequence>
+			<xs:element name="msisdn" type="xs:string" minOccurs="0"/>
+			<xs:element name="imeiOrPhoneType" type="xs:string" minOccurs="0"/>
+			<xs:element name="properties" type="ns1:dmMap" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="specialProperties" type="ns1:dmMap" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="submitProvisioningRequestResponse">
+		<xs:sequence>
+			<xs:element name="return" type="xs:int"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="submitProvisionReq">
+		<xs:sequence>
+			<xs:element name="msisdn" type="xs:string" minOccurs="0"/>
+			<xs:element name="imeiOrPhoneType" type="xs:string" minOccurs="0"/>
+			<xs:element name="groupName" type="xs:string" minOccurs="0"/>
+			<xs:element name="personParams" type="ns1:personalParams" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="specialProperties" type="ns1:dmMap" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="submitProvisionReqResponse">
+		<xs:sequence>
+			<xs:element name="return" type="xs:int"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="submitProvisionRequest">
+		<xs:sequence>
+			<xs:element name="msisdn" type="xs:string" minOccurs="0"/>
+			<xs:element name="imeiOrPhoneType" type="xs:string" minOccurs="0"/>
+			<xs:element name="scenarioName" type="xs:string" minOccurs="0"/>
+			<xs:element name="specialProperties" type="ns1:dmMap" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="submitProvisionRequestResponse">
+		<xs:sequence>
+			<xs:element name="return" type="xs:int"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="getScenario">
+		<xs:sequence>
+			<xs:element name="scenarioName" type="xs:string" minOccurs="0"/>
+			<xs:element name="subscription" type="ns1:Subscription" minOccurs="0"/>
+			<xs:element name="device" type="ns1:Device" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="getScenarioResponse">
+		<xs:sequence>
+			<xs:element name="return" type="ns1:SettingProvisioningScenario" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="content" abstract="true">
+		<xs:sequence>
+			<xs:element name="contentID" type="xs:long"/>
+			<xs:element name="description" type="xs:string" minOccurs="0"/>
+			<xs:element name="name" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="priority">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NORMAL"/>
+			<xs:enumeration value="HIGH"/>
+			<xs:enumeration value="LOW"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

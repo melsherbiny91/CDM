@@ -1,0 +1,626 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:ns2="http://nsn.com/DeviceManagement/wsdl/ApplicationManagement/2.0"
+	 xmlns:ns1="http://nsn.com/DeviceManagement/wsdl/BulkManagement/2.0"
+	 xmlns:ns4="http://nsn.com/DeviceManagement/wsdl/DeviceSecurity/2.0"
+	 xmlns:ns3="http://nsn.com/DeviceManagement/wsdl/Provisioning/2.0"
+	 xmlns:tns="http://nsn.com/DeviceManagement/wsdl/Common/2.0"
+	 xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	 xmlns:ns5="http://nsn.com/DeviceManagement/wsdl/DeviceManagement/2.0"
+	 xmlns:ns6="http://www.w3.org/2005/05/xmlmime"
+	 targetNamespace="http://nsn.com/DeviceManagement/wsdl/Common/2.0"
+	 version="1.0"
+	 elementFormDefault="unqualified"
+	 attributeFormDefault="unqualified">
+	<xs:import namespace="http://nsn.com/DeviceManagement/wsdl/BulkManagement/2.0" schemaLocation="Schema5.xsd"/>
+	<xs:import namespace="http://nsn.com/DeviceManagement/wsdl/ApplicationManagement/2.0" schemaLocation="Schema6.xsd"/>
+	<xs:import namespace="http://nsn.com/DeviceManagement/wsdl/Provisioning/2.0" schemaLocation="Schema1.xsd"/>
+	<xs:import namespace="http://nsn.com/DeviceManagement/wsdl/DeviceSecurity/2.0" schemaLocation="Schema2.xsd"/>
+	<xs:import namespace="http://nsn.com/DeviceManagement/wsdl/DeviceManagement/2.0" schemaLocation="Schema3.xsd"/>
+	<xs:element name="DMException" type="tns:DMException"/>
+	<xs:complexType name="DMException">
+		<xs:sequence>
+			<xs:element name="errorCode" type="xs:int"/>
+			<xs:element name="message" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Subscription">
+		<xs:sequence>
+			<xs:element name="msisdn" type="xs:string" minOccurs="0"/>
+			<xs:element name="imsi" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Device">
+		<xs:sequence>
+			<xs:element name="imei" type="xs:string" minOccurs="0"/>
+			<xs:element name="deviceType" type="tns:gsmPhoneType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="gsmPhoneType">
+		<xs:sequence>
+			<xs:element name="name" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="setting">
+		<xs:sequence>
+			<xs:element name="serviceSetting" type="tns:dmMap" minOccurs="0"/>
+			<xs:element name="displayName" type="xs:string" minOccurs="0"/>
+			<xs:element name="id" type="xs:long"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="dmMap">
+		<xs:sequence>
+			<xs:element name="hashTable">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="entry" minOccurs="0" maxOccurs="unbounded">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="key" type="xs:anyType" minOccurs="0"/>
+									<xs:element name="value" type="xs:anyType" minOccurs="0"/>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="dmList">
+		<xs:sequence>
+			<xs:element name="arrList" type="xs:anyType" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="personalParams" abstract="true"/>
+	<xs:complexType name="poCPersonalParams">
+		<xs:complexContent>
+			<xs:extension base="tns:personalParams">
+				<xs:sequence>
+					<xs:element name="password" type="xs:string" minOccurs="0"/>
+					<xs:element name="settingposition" type="xs:int"/>
+					<xs:element name="userName" type="xs:string" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="generalPersonalParams">
+		<xs:complexContent>
+			<xs:extension base="tns:personalParams">
+				<xs:sequence>
+					<xs:element name="parameter">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="entry" minOccurs="0" maxOccurs="unbounded">
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="key" type="xs:string" minOccurs="0"/>
+											<xs:element name="value" type="xs:string" minOccurs="0"/>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="settingName" type="xs:string" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="SettingProvisioningScenario">
+		<xs:complexContent>
+			<xs:extension base="tns:Scenario">
+				<xs:sequence>
+					<xs:element name="provisioning" type="tns:SettingProvisioning" minOccurs="0"/>
+					<xs:element name="subscriptionAware" type="xs:boolean"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Scenario" abstract="true">
+		<xs:sequence>
+			<xs:element name="description" type="xs:string" minOccurs="0"/>
+			<xs:element name="name" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SettingProvisioning">
+		<xs:complexContent>
+			<xs:extension base="tns:ProvisioningAction">
+				<xs:sequence>
+					<xs:element name="subscriptionAware" type="xs:boolean"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ProvisioningAction" abstract="true">
+		<xs:complexContent>
+			<xs:extension base="tns:Action">
+				<xs:sequence>
+					<xs:element name="serviceSettings" type="tns:setting" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="apnList" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="confirmation" type="tns:message" minOccurs="0"/>
+					<xs:element name="displayableGroupName" type="xs:string" minOccurs="0"/>
+					<xs:element name="invitation" type="tns:invitationMessage" minOccurs="0"/>
+					<xs:element name="notification" type="tns:message" minOccurs="0"/>
+					<xs:element name="preferDMProvisioningMethod" type="xs:boolean"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Action" abstract="true"/>
+	<xs:complexType name="message">
+		<xs:sequence>
+			<xs:element name="text" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="invitationMessage">
+		<xs:complexContent>
+			<xs:extension base="tns:message">
+				<xs:sequence>
+					<xs:element name="standalone" type="xs:boolean"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="AccessPointNamesAction">
+		<xs:complexContent>
+			<xs:extension base="tns:ProvisioningAction">
+				<xs:sequence>
+					<xs:element name="services" type="tns:dmMap" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ApplicationInstallAction">
+		<xs:complexContent>
+			<xs:extension base="tns:Action">
+				<xs:sequence>
+					<xs:element name="packID" type="xs:long"/>
+					<xs:element name="methods" type="ns1:ContentDownloadMethod" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="indicationMessage" type="tns:message" minOccurs="0"/>
+					<xs:element name="interactionLevel" type="tns:InteractionLevel" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ApplicationScanAction">
+		<xs:complexContent>
+			<xs:extension base="tns:Action">
+				<xs:sequence>
+					<xs:element name="delivered" type="xs:boolean"/>
+					<xs:element name="deployed" type="xs:boolean"/>
+					<xs:element name="runningState" type="xs:boolean"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ApplicationStartAction">
+		<xs:complexContent>
+			<xs:extension base="tns:Action">
+				<xs:sequence>
+					<xs:element name="application" type="ns2:application" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ApplicationStopAction">
+		<xs:complexContent>
+			<xs:extension base="tns:Action">
+				<xs:sequence>
+					<xs:element name="application" type="ns2:application" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ApplicationUninstallAction">
+		<xs:complexContent>
+			<xs:extension base="tns:Action">
+				<xs:sequence>
+					<xs:element name="application" type="ns2:application" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="APNProvisioningAction">
+		<xs:complexContent>
+			<xs:extension base="tns:ProvisioningAction">
+				<xs:sequence>
+					<xs:element name="APNs" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="DevDetailScanAction">
+		<xs:complexContent>
+			<xs:extension base="tns:Action"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="DeviceDataWipeAction">
+		<xs:complexContent>
+			<xs:extension base="tns:Action"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="DeviceEnableOTAAction">
+		<xs:complexContent>
+			<xs:extension base="tns:Action">
+				<xs:sequence>
+					<xs:element name="message" type="tns:message" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="DeviceEnableSecurityAction">
+		<xs:complexContent>
+			<xs:extension base="tns:Action">
+				<xs:sequence>
+					<xs:element name="method" type="tns:deviceSecurityMethod" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="deviceSecurityMethod">
+		<xs:sequence>
+			<xs:element name="type" type="tns:enablerType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DeviceLockAction">
+		<xs:complexContent>
+			<xs:extension base="tns:Action">
+				<xs:sequence>
+					<xs:element name="unlockCode" type="xs:string" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="EnablePolicyControlAction">
+		<xs:complexContent>
+			<xs:extension base="tns:Action"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="FileDownloadAction">
+		<xs:complexContent>
+			<xs:extension base="tns:Action">
+				<xs:sequence>
+					<xs:element name="file" type="tns:File" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="File">
+		<xs:complexContent>
+			<xs:extension base="ns3:content"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="FirmwareScanAction">
+		<xs:complexContent>
+			<xs:extension base="tns:Action"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="FirmwareUpgradeAction">
+		<xs:complexContent>
+			<xs:extension base="tns:Action">
+				<xs:sequence>
+					<xs:element name="firmwareID" type="xs:string" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="InteractionMessageAction">
+		<xs:complexContent>
+			<xs:extension base="tns:Action">
+				<xs:sequence>
+					<xs:element name="text" type="xs:string" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ScenarioInvocationAction">
+		<xs:complexContent>
+			<xs:extension base="tns:Action">
+				<xs:sequence>
+					<xs:element name="scenarioName" type="xs:string" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="SecuritySettingsScanAction">
+		<xs:complexContent>
+			<xs:extension base="tns:Action"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="SendAdminPasswordAction">
+		<xs:complexContent>
+			<xs:extension base="tns:Action"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="SendAutoLockSettingsAction">
+		<xs:complexContent>
+			<xs:extension base="tns:Action">
+				<xs:sequence>
+					<xs:element name="settings" type="ns4:autoLockSettings" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="SendMmsAction">
+		<xs:complexContent>
+			<xs:extension base="tns:Action">
+				<xs:sequence>
+					<xs:element name="mmsContent" type="tns:MmsContent" minOccurs="0"/>
+					<xs:element name="mmsSpecFeatures" type="tns:MmsSpecFeatures" minOccurs="0"/>
+					<xs:element name="mmsStdFeatures" type="tns:MmsStdFeatures" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="MmsContent">
+		<xs:sequence>
+			<xs:element name="MultiMediaPartId" type="tns:ContentId" minOccurs="0"/>
+			<xs:element ns6:expectedContentTypes="application/octet-stream" name="mmPartData" type="xs:base64Binary" minOccurs="0"/>
+			<xs:element name="messageText" type="xs:string" minOccurs="0"/>
+			<xs:element name="mmPartMeta" type="tns:ContentMeta" minOccurs="0"/>
+			<xs:element name="subject" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ContentId">
+		<xs:sequence>
+			<xs:element name="id" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ContentMeta">
+		<xs:sequence>
+			<xs:element name="contentType" type="xs:string" minOccurs="0"/>
+			<xs:element name="name" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="MmsSpecFeatures">
+		<xs:sequence>
+			<xs:element name="standAlone" type="xs:boolean"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="MmsStdFeatures">
+		<xs:sequence>
+			<xs:element name="deliveryReportExpected" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="expiryPeriod" type="xs:long" minOccurs="0"/>
+			<xs:element name="messageClass" type="tns:MessageClass" minOccurs="0"/>
+			<xs:element name="priority" type="ns3:priority" minOccurs="0"/>
+			<xs:element name="timeStamp" type="xs:dateTime" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SendPasswordPolicySettingsAction">
+		<xs:complexContent>
+			<xs:extension base="tns:Action">
+				<xs:sequence>
+					<xs:element name="settings" type="ns4:passwordPolicySettings" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="SettingDeleteAction">
+		<xs:complexContent>
+			<xs:extension base="tns:Action">
+				<xs:sequence>
+					<xs:element name="confirmation" type="tns:message" minOccurs="0"/>
+					<xs:element name="notification" type="tns:message" minOccurs="0"/>
+					<xs:element name="settings" type="tns:setting" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="SettingDeleteScannedAction">
+		<xs:complexContent>
+			<xs:extension base="tns:Action">
+				<xs:sequence>
+					<xs:element name="settings" type="ns5:setting" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="SettingScanAction">
+		<xs:complexContent>
+			<xs:extension base="tns:Action">
+				<xs:sequence>
+					<xs:element name="settingTypes" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="SettingVerificationAction">
+		<xs:complexContent>
+			<xs:extension base="tns:Action">
+				<xs:sequence>
+					<xs:element name="settings" type="tns:setting" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="SoftKeyAssignmentAction">
+		<xs:complexContent>
+			<xs:extension base="tns:Action">
+				<xs:sequence>
+					<xs:element name="appPackID" type="xs:long"/>
+					<xs:element name="softKeyID" type="tns:SoftKeyID" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="SyncBackupActionAction">
+		<xs:complexContent>
+			<xs:extension base="tns:Action">
+				<xs:sequence>
+					<xs:element name="databases" type="tns:BackupContent" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="SyncRestoreAction">
+		<xs:complexContent>
+			<xs:extension base="tns:Action">
+				<xs:sequence>
+					<xs:element name="databases" type="tns:BackupContent" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="WapPush">
+		<xs:complexContent>
+			<xs:extension base="tns:ApplicationInstallAction"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="NamedScenario">
+		<xs:complexContent>
+			<xs:extension base="tns:Scenario"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="applicationManagementBootstrapScenario">
+		<xs:complexContent>
+			<xs:extension base="tns:Scenario">
+				<xs:sequence>
+					<xs:element name="applicationManagementMethod" type="tns:applicationManagementMethod" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="applicationManagementMethod">
+		<xs:sequence>
+			<xs:element name="type" type="tns:enablerType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="defaultScenario">
+		<xs:complexContent>
+			<xs:extension base="tns:NamedScenario"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="blacklistedScenario">
+		<xs:complexContent>
+			<xs:extension base="tns:Scenario"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="deviceSecurityBootstrapScenario">
+		<xs:complexContent>
+			<xs:extension base="tns:Scenario">
+				<xs:sequence>
+					<xs:element name="deviceSecurityMethod" type="tns:deviceSecurityMethod" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="dmBootstrapScenario">
+		<xs:complexContent>
+			<xs:extension base="tns:Scenario">
+				<xs:sequence>
+					<xs:element name="connectivity" type="tns:setting" minOccurs="0"/>
+					<xs:element name="displayName" type="xs:string" minOccurs="0"/>
+					<xs:element name="serverURL" type="xs:string" minOccurs="0"/>
+					<xs:element name="serverPort" type="xs:int"/>
+					<xs:element name="autoNotif" type="xs:boolean"/>
+					<xs:element name="notification" type="tns:message" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="connectivityBootstrapScenario">
+		<xs:complexContent>
+			<xs:extension base="tns:Scenario">
+				<xs:sequence>
+					<xs:element name="locale" type="tns:localeWrapper" minOccurs="0"/>
+					<xs:element name="shouldConfirm" type="xs:boolean"/>
+					<xs:element name="connectivity" type="tns:setting" minOccurs="0"/>
+					<xs:element name="message" type="tns:message" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="localeWrapper">
+		<xs:sequence>
+			<xs:element name="country" type="xs:string" minOccurs="0"/>
+			<xs:element name="language" type="xs:string" minOccurs="0"/>
+			<xs:element name="variant" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ncsScenario">
+		<xs:complexContent>
+			<xs:extension base="tns:Scenario">
+				<xs:sequence>
+					<xs:element name="services" type="tns:setting" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="rcBootstrapScenario">
+		<xs:complexContent>
+			<xs:extension base="tns:Scenario">
+				<xs:sequence>
+					<xs:element name="notification" type="tns:message" minOccurs="0"/>
+					<xs:element name="operatorName" type="xs:string" minOccurs="0"/>
+					<xs:element name="proxyExternalAddress" type="xs:string" minOccurs="0"/>
+					<xs:element name="proxyExternalPort" type="xs:int"/>
+					<xs:element name="proxyInternalAddress" type="xs:string" minOccurs="0"/>
+					<xs:element name="proxyInternalPort" type="xs:int"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="sequenceScenario">
+		<xs:complexContent>
+			<xs:extension base="tns:Scenario">
+				<xs:sequence>
+					<xs:element name="actions" type="tns:Action" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:simpleType name="InteractionLevel">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="LOW"/>
+			<xs:enumeration value="MEDIUM"/>
+			<xs:enumeration value="HIGH"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="enablerType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="OMA_CP"/>
+			<xs:enumeration value="NOKIA_ERICSSON_OTA"/>
+			<xs:enumeration value="NOKIA_SMARTMESSAGE"/>
+			<xs:enumeration value="OPENWAVE_OTA"/>
+			<xs:enumeration value="MICROSOFT_OTA"/>
+			<xs:enumeration value="MANUAL_TEXT_OTA"/>
+			<xs:enumeration value="CUSTOM_OTA_ENCODING_1"/>
+			<xs:enumeration value="WAP_PUSH"/>
+			<xs:enumeration value="TEXT_SMS"/>
+			<xs:enumeration value="OMA_DM"/>
+			<xs:enumeration value="OMA_DL"/>
+			<xs:enumeration value="OMA_FUMO"/>
+			<xs:enumeration value="OMA_SCOMO"/>
+			<xs:enumeration value="SADM_DM_CLIENT"/>
+			<xs:enumeration value="NOKIA_TARM_CLIENT"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="MessageClass">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="PERSONAL"/>
+			<xs:enumeration value="INFORMATIONAL"/>
+			<xs:enumeration value="ADVERTISEMENT"/>
+			<xs:enumeration value="AUTO"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SoftKeyID">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="SOFTKEY_LEFT"/>
+			<xs:enumeration value="SOFTKEY_RIGHT"/>
+			<xs:enumeration value="SOFTKEY_IDLE1"/>
+			<xs:enumeration value="SOFTKEY_IDLE2"/>
+			<xs:enumeration value="SOFTKEY_IDLE3"/>
+			<xs:enumeration value="SOFTKEY_IDLE4"/>
+			<xs:enumeration value="SOFTKEY_IDLE5"/>
+			<xs:enumeration value="SOFTKEY_IDLE6"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="BackupContent">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="CALENDAR"/>
+			<xs:enumeration value="CONTACTS"/>
+			<xs:enumeration value="NOTES"/>
+			<xs:enumeration value="FILES_AND_FOLDERS"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

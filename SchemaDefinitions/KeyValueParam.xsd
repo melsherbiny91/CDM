@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	 xmlns:KVParam="http://xmlns.vfe.com.eg/CommonResources/SchemaDefinitions/KeyValueParam"
+	 targetNamespace="http://xmlns.vfe.com.eg/CommonResources/SchemaDefinitions/KeyValueParam"
+	 elementFormDefault="qualified"
+	 attributeFormDefault="unqualified">
+	<complexType name="Parameters">
+		<sequence>
+			<element name="Parameter" type="KVParam:Param" minOccurs="0" maxOccurs="unbounded"/>
+			<element name="ParameterList" type="KVParam:Parameters" minOccurs="0" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<complexType name="Param">
+		<sequence>
+			<element name="Key" type="string"/>
+			<element name="Value" type="string"/>
+		</sequence>
+	</complexType>
+<element name="Parameters" type="KVParam:Parameters"/>
+</schema>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsd:schema xmlns="http://xmlns.vfe.com.eg/EAI/celfocus/Common/ProcessDispatcher"
+	 xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	 xmlns:requestEAI="http://xmlns.vfe.com.eg/EAI/celfocus/requestEAI"
+	 xmlns:responseEAI="http://xmlns.vfe.com.eg/EAI/celfocus/responseEAI"
+	 targetNamespace="http://xmlns.vfe.com.eg/EAI/celfocus/Common/ProcessDispatcher"
+	 version="1.0"
+	 elementFormDefault="qualified"
+	 attributeFormDefault="unqualified">
+
+	<!--
+/******************************************************************************
+   Name:              ProcessDispatcherInput
+   Description:    Types to be used with the invokeInternalService subprocess
+
+   History:
+   Ver.        Date			Author(s)           			Description
+   _______________________________________________________
+   1.0        03-02-2015	Mohamed Bastawisy	Creation
+******************************************************************************/
+-->
+	<xsd:import namespace="http://xmlns.vfe.com.eg/EAI/celfocus/requestEAI" schemaLocation="../EAIschema/requestEAI.xsd"/>
+	<xsd:import namespace="http://xmlns.vfe.com.eg/EAI/celfocus/responseEAI" schemaLocation="../EAIschema/responseEAI.xsd"/>
+	<xsd:complexType name="ProcessDispatcherInput">
+		<xsd:sequence>
+			<xsd:element name="requestEAI" type="requestEAI:requestEAI" minOccurs="0"/>
+			<xsd:element name="serviceName" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ProcessDispatcherOutput">
+		<xsd:sequence>
+			<xsd:element name="responseEAI" type="responseEAI:responseEAI" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="MainInput">
+		<xsd:sequence>
+			<xsd:element name="requestEAI" type="requestEAI:requestEAI" minOccurs="0"/>
+			<xsd:element name="serviceName" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="loggingKey" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="processURL" type="xsd:string" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="MainOutput">
+		<xsd:sequence>
+			<xsd:element name="responseEAI" type="responseEAI:responseEAI" minOccurs="0"/>
+			<xsd:element name="KeyValuePair" minOccurs="0" maxOccurs="unbounded">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="key" type="xsd:string"/>
+						<xsd:element name="value" type="xsd:string"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="LogicalInput">
+		<xsd:sequence>
+			<xsd:element name="requestEAI" type="requestEAI:requestEAI" minOccurs="0"/>
+			<xsd:element name="parentServiceName" type="xsd:string" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="LogicalOutput">
+		<xsd:sequence>
+			<xsd:element name="responseEAI" type="responseEAI:responseEAI" minOccurs="0"/>
+			<xsd:element name="KeyValuePair" minOccurs="0" maxOccurs="unbounded">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="key" type="xsd:string"/>
+						<xsd:element name="value" type="xsd:string"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<!--- ServiceDispatcher V2 -->
+	<xsd:complexType name="ServiceDispatcherInput">
+		<xsd:sequence>
+			<xsd:element name="requestEAI" type="requestEAI:requestEAI" minOccurs="0"/>
+			<xsd:element name="serviceCode" type="xsd:string"/>
+			<xsd:element name="rethrowError" type="xsd:boolean" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ServiceDispatcherOutput">
+		<xsd:sequence>
+			<xsd:element name="responseEAI" type="responseEAI:responseEAI" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

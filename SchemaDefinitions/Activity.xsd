@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	 xmlns:activityns="http://vfe.com.eg/Siebel/Schemas/Activity/v1"
+	 targetNamespace="http://vfe.com.eg/Siebel/Schemas/Activity/v1"
+	 elementFormDefault="qualified"
+	 attributeFormDefault="unqualified">
+	<xsd:complexType name="Activity">
+		<xsd:sequence>
+		<xsd:element name = "Id" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "Created" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "CreatedBy" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "Updated" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "UpdatedBy" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "ConflictId" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "ModId" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "Searchspec" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "ACDCallDuration" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "AccountId" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "AccountLocation" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "AccountName" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "AccountNumber" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "AccountSourceId" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "ActiveFlag" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "ActivityDefectId" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "ActivityId" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "ActivitySRId" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "ActivityUID" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "Alarm" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "ApptAlarmTimeMin" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "AssessmentTemplateId" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "AssessmentTemplateName" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "AssetId" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "AssignmentExcluded" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "AssociatedCost" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "BranchId" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "BudgetedCost" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "BudgetedCostCurrencyCode" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "BudgetedCostExchangeDate" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "CalendarEventId" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "CalendarEventId2" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "CampaignId" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "Category" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "ClaimElementId" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "ClaimId" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "ClaimNumber" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "Comment" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "CreatedByName" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "CurrencyCode2" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "DeductionId" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "DefectId" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "DefectNum" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "Description3" maxOccurs = "1" minOccurs = "0"  nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "Display" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "Division2" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "DocumentExpectedDt" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "DocumentReceivedDt" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "DocumentSentDt" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "Done" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "Due" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "DurationMinutes" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "ExchangeDate" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "HouseholdId" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "JoinedAccountId" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "Lead" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "LocationLevel" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "MEEventId" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "Objective" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "ObjectiveId" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "Opportunity" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "OpportunityId" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "OrderId2" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "OrigApptId" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "OverrideType" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "PMActionId" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "ParentActivityId" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "PaymentFlag" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "PercentComplete" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "Planned" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "PlannedCompletion" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "PositionId" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "PrimaryAddressId" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "PrimaryContactId" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "PrimaryOwnedBy" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "PrimaryOwnerId" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "Priority" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "Private" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "ProductIssueId" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "ProductIssueNumber" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "ProjectId" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "ProjectItemId" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "ProjectName" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "ProtocolRegionId" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "ProtocolSiteId" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "Region" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "RepairId" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "Repeating" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "RepeatingExpires" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "RepeatingType" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "ResolutionCode" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "RowStatus2" maxOccurs = "1" minOccurs = "0"  nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "S-SInstance" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "S-SInstanceId" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "S-SKeyId" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "SRNumber" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "SRMRequestId" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "StageId" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "StartTime" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "Started" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "Status" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "SubjectId" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "SuppressCalendar" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "TemplateFlag" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "TemplateId" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "Type" maxOccurs = "1" minOccurs = "0"  nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "Units" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "WaveId" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		<xsd:element name = "ParentPlanName" maxOccurs = "1" minOccurs = "0" nillable="true" type = "xsd:string"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ActivityList">
+		<xsd:sequence>
+			<xsd:element name="Activity" type="activityns:Activity" minOccurs="0" nillable="true" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="Activity" type="activityns:Activity"/>
+	<xsd:element name="ActivityList" type="activityns:ActivityList"/>
+</xsd:schema>

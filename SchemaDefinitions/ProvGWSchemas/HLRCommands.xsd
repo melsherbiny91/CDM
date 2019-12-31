@@ -1,0 +1,597 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	 xmlns:HLRCommands="http://xmlns.vfe.com.eg/middleware/TCPFramework/ModelSchema/HLRCommands"
+	 xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	 targetNamespace="http://xmlns.vfe.com.eg/middleware/TCPFramework/ModelSchema/HLRCommands"
+	 elementFormDefault="qualified"
+	 attributeFormDefault="unqualified">
+
+	<!--
+******************************************************************************
+  Name:         	ViewSchema for TCP Framework
+  Description:    Carries the Model Schema for the View Subscriber Profile Command for HLR , its request and its response (C1 segments and C2 segments)
+
+   History:
+   Ver.        Date			Author(s)           		Description
+   _______________________________________________________
+   1.0        18-01-2010		Mohamed Shahat		Creation
+******************************************************************************/
+-->
+	<!-- 
+*******************************************************************
+		HLRCommands ComplexType declaration 
+*******************************************************************
+-->
+	<complexType name="HLRCommands">
+		<sequence>
+			<element name="ViewSubscriber" minOccurs="0">
+				<complexType>
+					<sequence>
+						<element ref="HLRCommands:ViewSubRequest" minOccurs="0"/>
+						<element ref="HLRCommands:ViewSubResponse" minOccurs="0"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="ProvisionSupplementaryService" minOccurs="0">
+				<complexType>
+					<sequence>
+						<element ref="HLRCommands:ProvisionSSRequest" minOccurs="0"/>
+						<element ref="HLRCommands:ProvisionSSResponse" minOccurs="0"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="RemoveBarring" minOccurs="0">
+				<complexType>
+					<sequence>
+						<element ref="HLRCommands:RemoveBarRequest" minOccurs="0"/>
+						<element ref="HLRCommands:RemoveBarResponse" minOccurs="0"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="WithdrawSupplementaryService" minOccurs="0">
+				<complexType>
+					<sequence>
+						<element ref="HLRCommands:WithdrawSSRequest" minOccurs="0"/>
+						<element ref="HLRCommands:WithdrawSSResponse" minOccurs="0"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="EraseSupplementaryService" minOccurs="0">
+				<complexType>
+					<sequence>
+						<element ref="HLRCommands:EraseSSRequest" minOccurs="0"/>
+						<element ref="HLRCommands:EraseSSResponse" minOccurs="0"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="UpdateSubscriber" minOccurs="0">
+				<complexType>
+					<sequence>
+						<element ref="HLRCommands:UpdateSubRequest" minOccurs="0"/>
+						<element ref="HLRCommands:UpdateSubResponse" minOccurs="0"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="RegisterSupplementaryService" minOccurs="0">
+				<complexType>
+					<sequence>
+						<element ref="HLRCommands:RegisterSSRequest" minOccurs="0"/>
+						<element ref="HLRCommands:RegisterSSResponse" minOccurs="0"/>
+					</sequence>
+				</complexType>
+			</element>
+		</sequence>
+	</complexType>
+
+	<!-- 
+*******************************************************************
+		Operations input, result declarations 
+*******************************************************************
+-->
+	<element name="ViewSubRequest" type="HLRCommands:ViewSubRequest"/>
+	<element name="ViewSubResponse" type="HLRCommands:ViewSubResponse"/>
+	<element name="EraseSSRequest" type="HLRCommands:EraseSSRequest"/>
+	<element name="EraseSSResponse" type="HLRCommands:EraseSSResponse"/>
+	<element name="WithdrawSSRequest" type="HLRCommands:WithdrawSSRequest"/>
+	<element name="WithdrawSSResponse" type="HLRCommands:WithdrawSSResponse"/>
+	<element name="RemoveBarRequest" type="HLRCommands:RemoveBarRequest"/>
+	<element name="RemoveBarResponse" type="HLRCommands:RemoveBarResponse"/>
+	<element name="ProvisionSSRequest" type="HLRCommands:ProvisionSSRequest"/>
+	<element name="ProvisionSSResponse" type="HLRCommands:ProvisionSSResponse"/>
+	<element name="RegisterSSRequest" type="HLRCommands:RegisterSSRequest"/>
+	<element name="RegisterSSResponse" type="HLRCommands:RegisterSSResponse"/>
+	<element name="UpdateSubRequest" type="HLRCommands:UpdateSubRequest"/>
+	<element name="UpdateSubResponse" type="HLRCommands:UpdateSubResponse"/>
+
+	<!-- 
+*******************************************************************
+		elements declarations 
+*******************************************************************
+-->
+	<element name="C100000" type="HLRCommands:C100000"/>
+	<element name="C100002" type="HLRCommands:C100002"/>
+	<element name="C200010" type="HLRCommands:C200010"/>
+	<element name="C200013" type="HLRCommands:C200013"/>
+	<element name="C200012" type="HLRCommands:C200012"/>
+	<element name="C200019" type="HLRCommands:C200019"/>
+	<element name="C200016" type="HLRCommands:C200016"/>
+	<element name="C200015" type="HLRCommands:C200015"/>
+	<element name="C200017" type="HLRCommands:C200017"/>
+	<element name="C200029" type="HLRCommands:C200029"/>
+	<element name="C200039" type="HLRCommands:C200039"/>
+	<element name="C200040" type="HLRCommands:C200040"/>
+	<element name="C200042" type="HLRCommands:C200042"/>
+	<element name="C200043" type="HLRCommands:C200043"/>
+	<element name="C200044" type="HLRCommands:C200044"/>
+	<element name="C1">
+		<complexType>
+			<choice>
+				<element ref="HLRCommands:C100000" minOccurs="0"/>
+				<element ref="HLRCommands:C100002" minOccurs="0"/>
+			</choice>
+		</complexType>
+	</element>
+	<element name="C2">
+		<complexType>
+			<choice>
+				<element ref="HLRCommands:C200010" minOccurs="0" maxOccurs="unbounded"/>
+				<element ref="HLRCommands:C200012" minOccurs="0" maxOccurs="unbounded"/>
+				<element ref="HLRCommands:C200013" minOccurs="0" maxOccurs="unbounded"/>
+				<element ref="HLRCommands:C200015" minOccurs="0" maxOccurs="unbounded"/>
+				<element ref="HLRCommands:C200016" minOccurs="0" maxOccurs="unbounded"/>
+				<element ref="HLRCommands:C200017" minOccurs="0" maxOccurs="unbounded"/>
+				<element ref="HLRCommands:C200019" minOccurs="0" maxOccurs="unbounded"/>
+				<element ref="HLRCommands:C200029" minOccurs="0" maxOccurs="unbounded"/>
+				<element ref="HLRCommands:C200039" minOccurs="0" maxOccurs="unbounded"/>
+				<element ref="HLRCommands:C200040" minOccurs="0" maxOccurs="unbounded"/>
+				<element ref="HLRCommands:C200042" minOccurs="0" maxOccurs="unbounded"/>
+				<element ref="HLRCommands:C200043" minOccurs="0" maxOccurs="unbounded"/>
+				<element ref="HLRCommands:C200044" minOccurs="0" maxOccurs="unbounded"/>
+			</choice>
+		</complexType>
+	</element>
+
+	<!-- 
+*******************************************************************
+		Request/Response  types declarations 
+*******************************************************************
+-->
+	<complexType name="ViewSubRequest">
+		<sequence>
+			<element name="Command" type="xs:string" fixed="VIEW:SUB"/>
+			<element name="Identification">
+				<simpleType>
+					<restriction base="xs:string">
+						<enumeration value="IMSE"/>
+						<enumeration value="MSISDN"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="KeyValue" type="xs:string"/>
+			<element name="RequestTermination" type="xs:string" default=";"/>
+		</sequence>
+	</complexType>
+	<complexType name="ViewSubResponse">
+		<sequence>
+			<element ref="HLRCommands:C1"/>
+			<element ref="HLRCommands:C2" minOccurs="0" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<complexType name="EraseSSRequest">
+		<sequence>
+			<element name="Command" type="xs:string" fixed="ERASE:SS"/>
+			<element name="Identification">
+				<simpleType>
+					<restriction base="xs:string">
+						<enumeration value="IMSE"/>
+						<enumeration value="MSISDN"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="KeyValue" type="xs:string"/>
+			<element name="SupplementaryServiceCode" type="xs:string"/>
+			<element name="BasicServiceGroup" type="xs:string" minOccurs="0"/>
+			<element name="RequestTermination" type="xs:string" default=";"/>
+		</sequence>
+	</complexType>
+	<complexType name="EraseSSResponse">
+		<sequence>
+			<element ref="HLRCommands:C1"/>
+		</sequence>
+	</complexType>
+	<complexType name="WithdrawSSRequest">
+		<sequence>
+			<element name="Command" type="xs:string" fixed="WITHDRAW:SS"/>
+			<element name="Identification">
+				<simpleType>
+					<restriction base="xs:string">
+						<enumeration value="IMSE"/>
+						<enumeration value="MSISDN"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="KeyValue" type="xs:string"/>
+			<element name="SupplementaryServiceCode" type="xs:string"/>
+			<element name="RequestTermination" type="xs:string" default=";"/>
+		</sequence>
+	</complexType>
+	<complexType name="WithdrawSSResponse">
+		<sequence>
+			<element ref="HLRCommands:C1"/>
+		</sequence>
+	</complexType>
+	<complexType name="RemoveBarRequest">
+		<sequence>
+			<element name="Command" type="xs:string" fixed="REMOVE:BAR"/>
+			<element name="Identification">
+				<simpleType>
+					<restriction base="xs:string">
+						<enumeration value="IMSE"/>
+						<enumeration value="MSISDN"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="KeyValue" type="xs:string"/>
+			<element name="OperatorDeterminedBarParameter" type="xs:string"/>
+			<element name="RequestTermination" type="xs:string" default=";"/>
+		</sequence>
+	</complexType>
+	<complexType name="RemoveBarResponse">
+		<sequence>
+			<element ref="HLRCommands:C1"/>
+		</sequence>
+	</complexType>
+	<complexType name="ProvisionSSRequest">
+		<sequence>
+			<element name="Command" type="xs:string" fixed="PROVISION:SS"/>
+			<element name="Identification">
+				<simpleType>
+					<restriction base="xs:string">
+						<enumeration value="IMSE"/>
+						<enumeration value="MSISDN"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="KeyValue" type="xs:string"/>
+			<element name="SupplementaryServiceCode" type="xs:string"/>
+			<element name="RequestTermination" type="xs:string" default=";"/>
+		</sequence>
+	</complexType>
+	<complexType name="ProvisionSSResponse">
+		<sequence>
+			<element ref="HLRCommands:C1"/>
+		</sequence>
+	</complexType>
+	<complexType name="RegisterSSRequest">
+		<sequence>
+			<element name="Command" type="xs:string" fixed="REGISTER:SS"/>
+			<element name="Identification">
+				<simpleType>
+					<restriction base="xs:string">
+						<enumeration value="IMSE"/>
+						<enumeration value="MSISDN"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="KeyValue" type="xs:string"/>
+			<element name="SupplementaryServiceCode" type="xs:string"/>
+			<element name="BasicServiceGroup" type="xs:string" minOccurs="0"/>
+			<element name="ForwardedToNumber" type="xs:string"/>
+			<element name="Timer" type="xs:string" minOccurs="0"/>
+			<element name="SSMode" type="xs:string" minOccurs="0"/>
+			<element name="RequestTermination" type="xs:string" default=";"/>
+		</sequence>
+	</complexType>
+	<complexType name="RegisterSSResponse">
+		<sequence>
+			<element ref="HLRCommands:C1"/>
+		</sequence>
+	</complexType>
+	<complexType name="UpdateSubRequest">
+		<sequence>
+			<element name="Command" type="xs:string" fixed="UPDATE:SUB"/>
+			<element name="Identification">
+				<simpleType>
+					<restriction base="xs:string">
+						<enumeration value="IMSE"/>
+						<enumeration value="MSISDN"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="attribute" type="xs:string" minOccurs="0"/>
+			<element name="attributeValue" type="xs:string" minOccurs="0"/>
+			<element name="KeyValue" type="xs:string"/>
+			<element name="RequestTermination" type="xs:string" default=";"/>
+		</sequence>
+	</complexType>
+	<complexType name="UpdateSubResponse">
+		<sequence>
+			<element ref="HLRCommands:C1"/>
+		</sequence>
+	</complexType>
+
+	<!-- 
+*******************************************************************
+		Complex types declarations   (C2, C1) 
+*******************************************************************
+-->
+	<complexType name="C200010">
+		<sequence>
+			<element name="rowtype" type="xs:string"/>
+			<element name="rowcode" type="xs:string"/>
+			<element name="imsi" type="xs:string"/>
+			<element name="pendimsi" type="xs:string" minOccurs="0"/>
+			<element name="exptime" type="xs:string" minOccurs="0"/>
+			<element name="MCEF" type="xs:string"/>
+			<element name="MNRF" type="xs:string"/>
+			<element name="MNRG" type="xs:string"/>
+			<element name="MNRRGSM" type="xs:string"/>
+			<element name="MNRRGPRS" type="xs:string"/>
+			<element name="SIMTYPE" type="xs:string"/>
+			<element name="SIMID" type="xs:string"/>
+			<element name="NOMBSG" type="xs:string"/>
+			<element name="sequencenumber" type="xs:string"/>
+			<element name="IMEISV" type="xs:string"/>
+			<element name="source" type="xs:string"/>
+			<element name="CSCurrent" type="xs:string"/>
+			<element name="PSCurrent" type="xs:string"/>
+			<element name="recache" type="xs:string"/>
+			<element name="time" type="xs:string"/>
+		</sequence>
+	</complexType>
+	<complexType name="C200013">
+		<sequence>
+			<element name="rowtype" type="xs:string"/>
+			<element name="rowcode" type="xs:string"/>
+			<element name="locked" type="xs:string"/>
+			<element name="admin" type="xs:string"/>
+			<element name="group" type="xs:string"/>
+			<element name="ctrlSSbar" type="xs:string"/>
+			<element name="GSMsubrestr" type="xs:string"/>
+			<element name="MSCat" type="xs:string"/>
+			<element name="trace" type="xs:string"/>
+			<element name="MSRNpfxid" type="xs:string"/>
+			<element name="badpwcnt" type="xs:string"/>
+			<element name="pword" type="xs:string"/>
+			<element name="servcencount" type="xs:string"/>
+			<element name="ServiceProviderCode" type="xs:string"/>
+			<element name="blankComma1" type="xs:string"/>
+			<element name="blankComma2" type="xs:string"/>
+			<element name="NAM" type="xs:string"/>
+			<element name="GPRSsubrestr" type="xs:string"/>
+			<element name="PAI" type="xs:string"/>
+			<element name="PAIctrl" type="xs:string"/>
+			<element name="transferofsm" type="xs:string"/>
+			<element name="cnumbehaviour" type="xs:string"/>
+			<element name="notifycf" type="xs:string"/>
+			<element name="notifyodb" type="xs:string"/>
+			<element name="notifycb" type="xs:string"/>
+			<element name="encryption" type="xs:string"/>
+			<element name="acr" type="xs:string"/>
+			<element name="sdmdest" type="xs:string"/>
+			<element name="MWDRaceTimer" type="xs:string"/>
+			<element name="emlppmax" type="xs:string"/>
+			<element name="emlppdefault" type="xs:string"/>
+		</sequence>
+	</complexType>
+	<complexType name="C200012">
+		<sequence>
+			<element name="rowtype" type="xs:string"/>
+			<element name="rowcode" type="xs:string"/>
+			<element name="CFUCP" type="xs:string"/>
+			<element name="CFBCP" type="xs:string"/>
+			<element name="CFNRYCP" type="xs:string"/>
+			<element name="presmode" type="xs:string"/>
+			<element name="CFNRCCP" type="xs:string"/>
+			<element name="CFBFP" type="xs:string"/>
+			<element name="CFNRYFP" type="xs:string"/>
+			<element name="override" type="xs:string"/>
+			<element name="SSprov" type="xs:string"/>
+			<element name="ODB" type="xs:string"/>
+			<element name="emptyElement" type="xs:string"/>
+			<element name="PRIORITY" type="xs:string"/>
+			<element name="SUBTYPE" type="xs:string"/>
+		</sequence>
+	</complexType>
+	<complexType name="C200019">
+		<sequence>
+			<element name="rowtype" type="xs:string"/>
+			<element name="rowcode" type="xs:string"/>
+			<element name="lastcaller" type="xs:string"/>
+			<element name="action" type="xs:string"/>
+			<element name="calltime" type="xs:string"/>
+			<element name="CLIstatus" type="xs:string"/>
+			<element name="BSused" type="xs:string"/>
+			<element name="SIMID" type="xs:string"/>
+			<element name="PresNum" type="xs:string"/>
+			<element name="Presnumstatus" type="xs:string"/>
+			<element name="ErasureFlag" type="xs:string"/>
+		</sequence>
+	</complexType>
+	<complexType name="C200016">
+		<sequence>
+			<element name="rowtype" type="xs:string"/>
+			<element name="rowcode" type="xs:string"/>
+			<element name="basicservices" type="xs:string"/>
+		</sequence>
+	</complexType>
+	<complexType name="C200015">
+		<sequence>
+			<element name="rowtype" type="xs:string"/>
+			<element name="rowcode" type="xs:string"/>
+			<element name="msisdn" type="xs:string"/>
+			<element name="BCtitle" type="xs:string"/>
+			<element name="BS" type="xs:string"/>
+			<element name="BSG" type="xs:string"/>
+		</sequence>
+	</complexType>
+	<complexType name="C200029">
+		<sequence>
+			<element name="rowtype" type="xs:string"/>
+			<element name="rowcode" type="xs:string"/>
+			<element name="Contextid" type="xs:string"/>
+			<element name="PDPstate" type="xs:string"/>
+			<element name="PDPtype" type="xs:string"/>
+			<element name="apn" type="xs:string"/>
+			<element name="staticaddress" type="xs:string"/>
+			<element name="QoS" type="xs:string"/>
+			<element name="FreeAPN" type="xs:string"/>
+			<element name="VPLMNallowed" type="xs:string"/>
+			<element name="ExtQoS" type="xs:string"/>
+			<element name="ChargingChar" type="xs:string"/>
+		</sequence>
+	</complexType>
+	<complexType name="C200039">
+		<sequence>
+			<element name="rowtype" type="xs:string"/>
+			<element name="rowcode" type="xs:string"/>
+			<element name="destnum1" type="xs:string"/>
+			<element name="destnum2" type="xs:string"/>
+			<element name="destnum3" type="xs:string"/>
+			<element name="destnum4" type="xs:string"/>
+			<element name="destnum5" type="xs:string"/>
+			<element name="destnum6" type="xs:string"/>
+			<element name="destnum7" type="xs:string"/>
+			<element name="destnum8" type="xs:string"/>
+			<element name="destnum9" type="xs:string"/>
+			<element name="destnum10" type="xs:string"/>
+			<element name="destnumlen1" type="xs:string"/>
+			<element name="destnumlen2" type="xs:string"/>
+			<element name="destnumlen3" type="xs:string"/>
+		</sequence>
+	</complexType>
+	<complexType name="C200040">
+		<sequence>
+			<element name="rowtype" type="xs:string"/>
+			<element name="rowcode" type="xs:string"/>
+			<element name="locstat" type="xs:string"/>
+			<element name="locationoperation" type="xs:string"/>
+			<element name="acttime" type="xs:string"/>
+			<element name="imsi" type="xs:string"/>
+			<element name="flavour" type="xs:string"/>
+			<element name="entitytitle" type="xs:string"/>
+			<element name="entitytimezone" type="xs:string"/>
+			<element name="entityflags" type="xs:string"/>
+			<element name="Mapversion" type="xs:string"/>
+			<element name="EMAP" type="xs:string"/>
+			<element name="UnsuppODB" type="xs:string"/>
+			<element name="UnsuppSS" type="xs:string"/>
+			<element name="UnsuppBS" type="xs:string"/>
+			<element name="p1" type="xs:string"/>
+			<element name="p2" type="xs:string"/>
+			<element name="p3" type="xs:string"/>
+			<element name="p4" type="xs:string"/>
+			<element name="p5" type="xs:string"/>
+			<element name="p6" type="xs:string"/>
+			<element name="p7" type="xs:string"/>
+			<element name="Unsupppos" type="xs:string"/>
+			<element name="downloadedCCHs" type="xs:string"/>
+			<element name="CSITDPsinuse" type="xs:string"/>
+			<element name="Unsuppserv" type="xs:string"/>
+			<element name="gprsesi" type="xs:string"/>
+		</sequence>
+	</complexType>
+	<complexType name="C200042">
+		<sequence>
+			<element name="rowtype" type="xs:string"/>
+			<element name="rowcode" type="xs:string"/>
+			<element name="PSIstatus" type="xs:string"/>
+			<element name="PSIVLR" type="xs:string"/>
+			<element name="PSILocnumber" type="xs:string"/>
+			<element name="PSILocage" type="xs:string"/>
+			<element name="PSIcellOrSaiId" type="xs:string"/>
+			<element name="PSILai" type="xs:string"/>
+			<element name="PSIGeographic" type="xs:string"/>
+			<element name="PSIsubState" type="xs:string"/>
+			<element name="PSInrReason" type="xs:string"/>
+			<element name="PSIselectedLSA" type="xs:string"/>
+			<element name="PSIMSC" type="xs:string"/>
+			<element name="PSIgeodetic" type="xs:string"/>
+			<element name="PSIcurrentLoc" type="xs:string"/>
+			<element name="PSISAIpresent" type="xs:string"/>
+		</sequence>
+	</complexType>
+	<complexType name="C200043">
+		<sequence>
+			<element name="rowtype" type="xs:string"/>
+			<element name="rowcode" type="xs:string"/>
+			<element name="OICK" type="xs:string"/>
+			<element name="nosvcunsuppbh" type="xs:string"/>
+			<element name="Hometick" type="xs:string"/>
+			<element name="Roamtick" type="xs:string"/>
+		</sequence>
+	</complexType>
+	<complexType name="C200044">
+		<sequence>
+			<element name="rowtype" type="xs:string"/>
+			<element name="rowcode" type="xs:string"/>
+			<element name="CSITDP" type="xs:string"/>
+			<element name="CAMELkey" type="xs:string"/>
+			<element name="GSMSCF" type="xs:string"/>
+			<element name="defaultcallhandling" type="xs:string"/>
+			<element name="lowerCAMELunsuppbh" type="xs:string"/>
+			<element name="blankComma1" type="xs:string"/>
+			<element name="CCH" type="xs:string"/>
+			<element name="TIFCSI" type="xs:string"/>
+			<element name="matchtype" type="xs:string"/>
+			<element name="blankComma2" type="xs:string"/>
+			<element name="blankComma3" type="xs:string"/>
+			<element name="blankComma4" type="xs:string"/>
+			<element name="blankComma5" type="xs:string"/>
+			<element name="blankComma6" type="xs:string"/>
+			<element name="blankComma7" type="xs:string"/>
+			<element name="blankComma8" type="xs:string"/>
+			<element name="blankComma9" type="xs:string"/>
+			<element name="blankComma10" type="xs:string"/>
+			<element name="blankComma11" type="xs:string"/>
+			<element name="blankComma12" type="xs:string"/>
+			<element name="blankComma13" type="xs:string"/>
+			<element name="blankComma14" type="xs:string"/>
+			<element name="nosvcunsuppbh" type="xs:string"/>
+			<element name="ocauseval" type="xs:string"/>
+			<element name="basicservicecriteria" type="xs:string"/>
+			<element name="calltype" type="xs:string"/>
+			<element name="CSIActive" type="xs:string"/>
+			<element name="CSENotify" type="xs:string"/>
+		</sequence>
+	</complexType>
+	<complexType name="C200017">
+		<sequence>
+			<element name="rowtype" type="xs:string"/>
+			<element name="rowcode" type="xs:string"/>
+			<element name="BSGmask" type="xs:string"/>
+			<element name="RegMask" type="xs:string"/>
+			<element name="ActMask" type="xs:string"/>
+			<element name="QHLRmask" type="xs:string"/>
+			<element name="CFNRyFTN" type="xs:string" minOccurs="0"/>
+			<element name="CFNRCFTN" type="xs:string" minOccurs="0"/>
+			<element name="CFBFTN" type="xs:string" minOccurs="0"/>
+			<element name="CFUFTN" type="xs:string" minOccurs="0"/>
+			<element name="CFNRyBehaviour" type="xs:string" minOccurs="0"/>
+			<element name="CFNRcBehaviour" type="xs:string" minOccurs="0"/>
+			<element name="CFBBehaviour" type="xs:string" minOccurs="0"/>
+			<element name="CFUBehaviour" type="xs:string" minOccurs="0"/>
+			<element name="CFNRyTimer" type="xs:string" minOccurs="0"/>
+			<element name="CFNRySeFlags" type="xs:string" minOccurs="0"/>
+			<element name="CFNRcSeFlags" type="xs:string" minOccurs="0"/>
+			<element name="CFBSeFlags" type="xs:string" minOccurs="0"/>
+			<element name="CFUSeFlags" type="xs:string" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="C100000">
+		<sequence>
+			<element name="rowname" type="xs:string"/>
+			<element name="Sucess1" type="xs:string" fixed="00000"/>
+			<element name="Sucess2" type="xs:string" fixed="00000"/>
+		</sequence>
+	</complexType>
+	<complexType name="C100002">
+		<sequence>
+			<element name="rowname" type="xs:string"/>
+			<element name="Error" type="xs:string"/>
+			<element name="errorcode" type="xs:string"/>
+			<element name="errormessage" type="xs:string"/>
+		</sequence>
+	</complexType>
+</schema>

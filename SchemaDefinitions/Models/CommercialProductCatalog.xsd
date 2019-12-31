@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	 xmlns:catalog="http://xmlns.vodafone.com.eg/tibco/catalog"
+	 xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	 targetNamespace="http://xmlns.vodafone.com.eg/tibco/catalog"
+	 elementFormDefault="qualified"
+	 attributeFormDefault="unqualified">
+
+	<!--Change only the below elements-->
+	<complexType name="Characteristic">
+		<sequence>
+			<element name="Name" type="xsd:string" minOccurs="0"/>
+			<element name="Value" type="xsd:string" minOccurs="0"/>
+			<element name="UOM" type="xsd:string" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="Segment">
+		<sequence>
+			<element name="SegmentID" type="xsd:string" minOccurs="0"/>
+			<element name="SegmentType" type="xsd:string" minOccurs="0"/>
+			<element name="RelationshipType" type="xsd:string" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="Price">
+		<sequence>
+			<element name="PriceID" type="xsd:string" minOccurs="0"/>
+			<element name="Amount" type="xsd:string" minOccurs="0"/>
+			<element name="AmountUOM" type="xsd:string" minOccurs="0"/>
+			<element name="Type" type="xsd:string" minOccurs="0"/>
+			<element name="Duration" type="xsd:string" minOccurs="0"/>
+			<element name="DurationUOM" type="xsd:string" minOccurs="0"/>
+			<element name="ChargeFrom" type="xsd:string" minOccurs="0"/>
+			<element name="UsageCharacteristic" type="xsd:string" minOccurs="0"/>
+			<element name="Segment" type="catalog:Segment" minOccurs="0" maxOccurs="unbounded"/>
+			<element name="Discount" type="catalog:Discount" minOccurs="0" maxOccurs="unbounded"/>
+			<element name="Allowance" type="catalog:Allowance" minOccurs="0" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<complexType name="Discount">
+		<sequence>
+			<element name="DiscountID" type="xsd:string" minOccurs="0"/>
+			<element name="Type" type="xsd:string" minOccurs="0"/>
+			<element name="ArabicName" type="xsd:string" minOccurs="0"/>
+			<element name="EnglishName" type="xsd:string" minOccurs="0"/>
+			<element name="Duration" type="xsd:string" minOccurs="0"/>
+			<element name="DurationUOM" type="xsd:string" minOccurs="0"/>
+			<element name="Amount" type="xsd:string" minOccurs="0"/>
+			<element name="AmountUOM" type="xsd:string" minOccurs="0"/>
+			<element name="Segment" type="catalog:Segment" minOccurs="0" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<complexType name="Allowance">
+		<sequence>
+			<element name="AllowanceID" type="xsd:string" minOccurs="0"/>
+			<element name="AllowanceType" type="xsd:string" minOccurs="0"/>
+			<element name="AllowanceSubClass" type="xsd:string" minOccurs="0"/>
+			<element name="AllowanceCommercialName" type="xsd:string" minOccurs="0"/>
+			<element name="AllowanceDescription" type="xsd:string" minOccurs="0"/>
+			<element name="AllowanceUsageChar" type="xsd:string" minOccurs="0"/>
+			<element name="AllowanceValue" type="catalog:Segment" minOccurs="0" maxOccurs="unbounded"/>
+			<element name="AllowanceValueUOM" type="xsd:string" minOccurs="0"/>
+			<element name="AllowancePeriod" type="xsd:string" minOccurs="0"/>
+			<element name="AllowancePeriodUOM" type="xsd:string" minOccurs="0"/>
+			<element name="AllowanceStatus" type="xsd:string" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="Product">
+		<sequence>
+			<element name="ProductID" type="xsd:string" minOccurs="0"/>
+			<element name="TechID" type="xsd:string" minOccurs="0"/>
+			<element name="Description" type="xsd:string" minOccurs="0"/>
+			<element name="ArabicDescription" type="xsd:string" minOccurs="0"/>
+			<element name="Type" type="xsd:string" minOccurs="0"/>
+			<element name="Stream" type="xsd:string" minOccurs="0"/>
+			<element name="FirstClass" type="xsd:string" minOccurs="0"/>
+			<element name="SecondClass" type="xsd:string" minOccurs="0"/>
+			<element name="ThirdClass" type="xsd:string" minOccurs="0"/>
+			<element name="ArabicName" type="xsd:string" minOccurs="0"/>
+			<element name="EnglishName" type="xsd:string" minOccurs="0"/>
+			<element name="Status" type="xsd:string" minOccurs="0"/>
+			<element name="MigrationType" type="xsd:string" minOccurs="0"/>
+			<element name="Characteristics" type="catalog:Characteristic" minOccurs="0" maxOccurs="unbounded"/>
+			<element name="Segment" type="catalog:Segment" minOccurs="0" maxOccurs="unbounded"/>
+			<element name="Price" type="catalog:Price" minOccurs="0" maxOccurs="unbounded"/>
+			<element name="Discount" type="catalog:Discount" minOccurs="0" maxOccurs="unbounded"/>
+			<element name="Allowance" type="catalog:Allowance" minOccurs="0" maxOccurs="unbounded"/>
+			<element name="PolicyRule" type="catalog:PolicyRule" minOccurs="0" maxOccurs="unbounded"/>
+			<element name="RelationWithOtherProducts" type="catalog:RelationWithOtherProducts" minOccurs="0" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<complexType name="RelationWithOtherProducts">
+		<sequence>
+			<element name="ProductID" type="xsd:string" minOccurs="0"/>
+			<element name="RelationType" type="xsd:string" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="PolicyRule">
+		<sequence>
+			<element name="RuleID" type="xsd:string" minOccurs="0"/>
+			<element name="RuleType" type="xsd:string" minOccurs="0"/>
+			<element name="RuleSubClass" type="xsd:string" minOccurs="0"/>
+			<element name="RuleCommName" type="xsd:string" minOccurs="0"/>
+			<element name="RuleDesc" type="xsd:string" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<element name="Products">
+		<complexType>
+			<sequence>
+				<element name="Product" type="catalog:Product" minOccurs="0" maxOccurs="unbounded"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="Product" type="catalog:Product"/>
+</schema>

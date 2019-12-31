@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	 xmlns="http://www.tibco.com/schemas/SERVICES/CommonResources/SchemaDefinitions/EAIschema/Schema.xsd"
+	 targetNamespace="http://www.tibco.com/schemas/SERVICES/CommonResources/SchemaDefinitions/EAIschema/Schema.xsd"
+	 elementFormDefault="qualified"
+	 attributeFormDefault="unqualified">
+	<xs:element name="JMS">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Servicename"/>
+				<xs:element ref="Priority" minOccurs="0"/>
+				<xs:element ref="InvocationType" minOccurs="0"/>
+				<xs:element ref="JMSExpiration" minOccurs="0"/>
+				<xs:element ref="requestTimeout" minOccurs="0"/>
+				<xs:element ref="replyToDestination" minOccurs="0"/>
+				<xs:element ref="RequesterContainer"/>
+				<xs:element ref="ServiceContainer"/>
+				<xs:element ref="BusinessProject" minOccurs="0"/>
+				<xs:element ref="DestinationName"/>
+				<xs:element ref="DeliveryMode" minOccurs="0"/>
+				<xs:element ref="BuisnessDomain" minOccurs="0"/>
+				<xs:element ref="CorrelationID" minOccurs="0"/>
+				<xs:element ref="KEY" minOccurs="0"/>
+				<xs:element ref="ForceRedelivery"/>
+				<xs:element ref="NeedReplyEvent" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Servicename" type="xs:string"/>
+	<xs:element name="Quality" default="NR">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="HQ"/>
+				<xs:enumeration value="TH"/>
+				<xs:enumeration value="NR"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="InvocationType" default="SYNC">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="SYNC"/>
+				<xs:enumeration value="ASYNC"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="JMSExpiration" type="xs:integer"/>
+	<xs:element name="Priority" type="xs:short"/>
+	<xs:element name="requestTimeout" type="xs:string"/>
+	<xs:element name="replyToDestination" type="xs:string"/>
+	<xs:element name="RequesterContainer" type="xs:string"/>
+	<xs:element name="ServiceContainer" type="xs:string"/>
+	<xs:element name="BusinessProject" type="xs:string"/>
+	<xs:element name="DestinationName" type="xs:string"/>
+	<xs:element name="DeliveryMode">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="PERSISTENT"/>
+				<xs:enumeration value="NON_PERSISTENT"/>
+				<xs:enumeration value="EMS_RELIABLE_DELIVERY"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="BuisnessDomain">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="DATA"/>
+				<xs:enumeration value="RISK"/>
+				<xs:enumeration value="VOICE"/>
+				<xs:enumeration value="CUSTOMERCARE"/>
+				<xs:enumeration value="MI"/>
+				<xs:enumeration value="ADSL"/>
+				<xs:enumeration value="UNCATEGORIZED"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="KEY" type="xs:string"/>
+	<xs:element name="CorrelationID" type="xs:string"/>
+	<xs:element name="ForceRedelivery" type="xs:boolean"/>
+	<xs:element name="NeedReplyEvent" type="xs:boolean"/>
+</xs:schema>

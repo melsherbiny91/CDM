@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	 xmlns:requestEAI="http://xmlns.vfe.com.eg/EAI/celfocus/requestEAI"
+	 xmlns:EAIschema="http://xmlns.vfe.com.eg/EAI/celfocus"
+	 xmlns:COM="http://xmlns.vfe.com.eg/EAI/celfocus/COM"
+	 xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	 targetNamespace="http://xmlns.vfe.com.eg/EAI/celfocus/requestEAI"
+	 elementFormDefault="qualified"
+	 attributeFormDefault="unqualified">
+	<import namespace="http://xmlns.vfe.com.eg/EAI/celfocus" schemaLocation="header.xsd"/>
+	<import namespace="http://xmlns.vfe.com.eg/EAI/celfocus/COM" schemaLocation="../COM/COM.xsd"/>
+
+	<!--Only alter the above elements-->
+	<!--Change the complexType name-->
+	<complexType name="requestEAI">
+		<sequence>
+			<element name="Header" type="EAIschema:Header" minOccurs="0"/>
+			<element name="Data" type="requestEAI:Data" minOccurs="0"/>
+			<element name="COM" type="COM:COM" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="Data">
+		<sequence>
+			<any namespace="##any" processContents="skip" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	
+	<element name="RequestEAI" type="requestEAI:requestEAI"/>
+	
+</schema>

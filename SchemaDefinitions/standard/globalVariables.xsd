@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsd:schema xmlns="http://xmlns.vfe.com.eg/EAI/celfocus/Common/globalVariables"
+	 xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	 targetNamespace="http://xmlns.vfe.com.eg/EAI/celfocus/Common/globalVariables"
+	 version="1.0"
+	 elementFormDefault="qualified"
+	 attributeFormDefault="unqualified">
+
+	<!--
+/******************************************************************************
+   Name:              globalVariables
+   Description:    Global variables to be used in all Business Processes
+
+   History:
+   Ver.        Date			Author(s)           			Description
+   _______________________________________________________
+   1.0        21-04-2005		Filipe Pateiro			Creation
+******************************************************************************/
+-->
+	<xsd:element name="commonVariables" type="commonVars"/>
+	<xsd:complexType name="targetData">
+		<xsd:sequence>
+			<xsd:element name="Domain" type="xsd:string" nillable="true" minOccurs="0"/>
+			<xsd:element name="Object" type="xsd:string" nillable="true" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="globalVariables">
+		<xsd:sequence>
+			<xsd:element name="serviceName" type="xsd:string"/>
+			<xsd:element name="traceString" type="xsd:string" nillable="true" minOccurs="0"/>
+			<xsd:element name="target" type="targetData" nillable="true" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="commonVars">
+		<xsd:sequence>
+			<xsd:element name="hostName" type="xsd:string" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

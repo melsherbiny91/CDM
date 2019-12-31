@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	 targetNamespace="http://nsn.com/DeviceManagement/wsdl/BulkManagement/2.0"
+	 version="1.0"
+	 elementFormDefault="unqualified"
+	 attributeFormDefault="unqualified">
+	<xs:simpleType name="ContentDownloadMethod">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="OMA_SCOMO"/>
+			<xs:enumeration value="WAP_PUSH"/>
+			<xs:enumeration value="TEXT_SMS"/>
+			<xs:enumeration value="TARM_CLIENT"/>
+			<xs:enumeration value="SADM_CLIENT"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

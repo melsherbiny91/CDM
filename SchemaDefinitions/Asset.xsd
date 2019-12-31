@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	 xmlns:assetns="http://vfe.com.eg/Siebel/Schemas/Asset/v1"
+	 targetNamespace="http://vfe.com.eg/Siebel/Schemas/Asset/v1"
+	 elementFormDefault="qualified"
+	 attributeFormDefault="unqualified">
+	<xsd:complexType name="Asset">
+		<xsd:sequence>
+			<xsd:element name="Id" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="Created" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="CreatedBy" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="Updated" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="UpdatedBy" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="ConflictId" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="ModId" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="Searchspec" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="AccountIntegrationId" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="AccountType" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="AgreementAddressId" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="AgreementId" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="AgreementItemId" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="AgreementName" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="AgreementNum" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="AgreementProviderId" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="AssetCategory" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="AssetCurrencyCode" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="AssetDescription" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="AssetId" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="AssetMemberCompatibility" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="AssetNumber" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="AssetReferenceNumber" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="AssetValue" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="AssetValueExchangeDate" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="BasePrice" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="BillingAccount" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="BillingAccountId" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="BillingType" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="Capacity" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="CautionFlag" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="Comments" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="CompoundProductFlag" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="CompoundProductNumber" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="CostList" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="CostListId" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="CurrencyCode" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="CustomizableFlag" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="DiscountAmount" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="DiscountPercent" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="EffectiveEndDate" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="IncidentAssetType" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="InstallDate" type="xsd:string" minOccurs="0"/>
+
+			<!--key1-->
+			<xsd:element name="IntegrationId" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="License" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="LicenseNumber" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="Name" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="OperatingStatus" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="OptionCode" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="OriginalCost" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="OriginalOrderId" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="Owner" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="OwnerAccount" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="OwnerAccountId" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="OwnerAssetNumber" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="OwnerContactId" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="ParentAssetId" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="ParentAssetName" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="ParentAssetNumber" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="PaymentType" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="PortNumber" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="PreferredServiceDealer" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="PreferredServiceDealerId" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="ProdItemId" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="ProdPromId" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="ProdPromInstanceId" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="ProdPromName" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="ProdPromRuleId" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="ProdPromSourceId" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="ProdStatus" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="ProdStatusId" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="ProdType" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="ProdcutCriticalFlag" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="ProductBuild" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="ProductCatalogNumber" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="ProductCategory" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="ProductCriticalCode" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="ProductDefTypeCode" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="ProductDescription" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="ProductDeviceApprovalBody" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="ProductDeviceApprovalNumber" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="ProductEffectiveFrom" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="ProductEffectiveTo" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="ProductFrequency" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="ProductId" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="ProductInventoryId" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="ProductNDC" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="ProductName" type="xsd:string"/>
+			<xsd:element name="ProductPartNumber" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="ProductPortId" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="ProductPrimaryManufactureAddressId" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="ProductPrimaryManufacturerId" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="ProductPrimaryManufacturerName" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="ProductPrimaryProductLine" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="ProductPrimaryProductLineId" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="ProductRouteUsed" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="ProductSerializedFlag" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="ProductType" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="ProductUnitConversionFactor" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="ProductVersion" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="ProductXAClassId" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="PurchaseDate" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="PurchaseLocationDescription" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="Quantity" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="RegisteredDate" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="Score" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="Section" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="SelectedSRRoutingDealer" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="SelectedSRRoutingDealerId" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="SerialNumber" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="SerialNumberVerifiedFlag" type="xsd:string" minOccurs="0"/>
+
+			<!--key2-->
+			<xsd:element name="ServiceAccount" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="ServiceAccountId" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="SmartPartNumber" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="StartDate" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="Status" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="ToPortNumber" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="ToServiceAccount" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="ToServiceAccountId" type="xsd:string" minOccurs="0"/>
+
+			<!--key2-->
+			<xsd:element name="Type" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="ValidationDate" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="ValidationStatus" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="Version" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="WarrantyEndDate" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="WarrantyStartDate" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="WarrantyType" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="childAssetList" type="assetns:AssetsList" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="AssetsList">
+		<xsd:sequence>
+			<xsd:element name="Asset" type="assetns:Asset" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="Asset" type="assetns:Asset"/>
+	<xsd:element name="AssetsList" type="assetns:AssetsList"/>
+</xsd:schema>
